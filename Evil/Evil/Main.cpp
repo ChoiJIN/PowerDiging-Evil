@@ -4,9 +4,7 @@
 //Include GLFW
 #include <GLFW/glfw3.h>
 
-//Include the standard C++ headers
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
 
 //Define an error callback
 static void error_callback(int error, const char* description)
@@ -15,11 +13,25 @@ static void error_callback(int error, const char* description)
 	_fgetchar();
 }
 
-//Define the key input callback
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
+static void button_callback(GLFWwindow* window, int button, int action, int mode)
+{
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+		std::cout << "pressed" << std::endl;
+	}
+	else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
+		std::cout << "released" << std::endl;
+	}
+}
+
+static void cursor_callback(GLFWwindow* window, double x, double y)
+{
+	std::cout << x << ", " << y << std::endl;
 }
 
 int main(void)
@@ -43,7 +55,7 @@ int main(void)
 	GLFWwindow* window;
 
 	//Create a window and create its OpenGL context
-	window = glfwCreateWindow(640, 480, "Test Window", NULL, NULL);
+	window = glfwCreateWindow(600, 600, "Test Window", NULL, NULL);
 
 	//If the window couldn't be created
 	if (!window)
@@ -56,8 +68,13 @@ int main(void)
 	//This function makes the context of the specified window current on the calling thread. 
 	glfwMakeContextCurrent(window);
 
+	//Sets the swap interval(fps)
+	glfwSwapInterval(1);
+
 	//Sets the key callback
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorPosCallback(window, cursor_callback);
+	glfwSetMouseButtonCallback(window, button_callback);
 
 	//Initialize GLEW
 	GLenum err = glewInit();
@@ -70,21 +87,34 @@ int main(void)
 	}
 
 	//Set a background color
-	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
+	glClearColor(0.3f, 0.3f, 0.3f, 0.0f);
 
 	//Main Loop
-	do
+	while (!glfwWindowShouldClose(window))
 	{
-		//Clear color buffer
+		float ratio;
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		ratio = width / (float)height;
+		glViewport(0, 0, width, height);
+
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		double time = glfwGetTime();
+
+		std::cout << time << std::endl;
+
+		glBegin(GL_TRIANGLES);
+		glVertex2d(0, 0);
+		glVertex2d(0.5, 0.5);
+		glVertex2d(0.5, 0);
+		glEnd();
 
 		//Swap buffers
 		glfwSwapBuffers(window);
 		//Get and organize events, like keyboard and mouse input, window resizing, etc...
 		glfwPollEvents();
-
-	} //Check if the ESC key had been pressed or if the window had been closed
-	while (!glfwWindowShouldClose(window));
+	}
 
 	//Close OpenGL window and terminate GLFW
 	glfwDestroyWindow(window);
