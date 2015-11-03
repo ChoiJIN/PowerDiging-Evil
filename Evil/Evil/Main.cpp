@@ -1,10 +1,13 @@
-//Include GLEW
+// Graphic Library
 #include <GL/glew.h>
-
-//Include GLFW
 #include <GLFW/glfw3.h>
 
+// Standard Library
 #include <iostream>
+#include <fstream>
+
+// Game Library
+#include "GameSystem.h"
 
 //Define an error callback
 static void error_callback(int error, const char* description)
@@ -90,31 +93,57 @@ int main(void)
 	glClearColor(0.3f, 0.3f, 0.3f, 0.0f);
 
 	//Main Loop
-	while (!glfwWindowShouldClose(window))
+	double deltaTime = 1000 / 30.0;
+	double timeAccumulator = 0;
+	
+	while (!GameSystem::isGameEnd())
 	{
-		float ratio;
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-		ratio = width / (float)height;
-		glViewport(0, 0, width, height);
+		double timeSimulatedThisIteration = 0;
+		double startTime = glfwGetTime();
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		while (timeAccumulator >= deltaTime)
+		{
+			GameSystem::stepGameState(deltaTime);
+			timeAccumulator -= deltaTime;
+			timeSimulatedThisIteration += deltaTime;
+		}
 
-		double time = glfwGetTime();
+		//stepAnimation(timeSimulatedThisIteration);
 
-		std::cout << time << std::endl;
+		// Draw
+		//renderFrame();
+		GameSystem::debug.log("merong");
 
-		glBegin(GL_TRIANGLES);
-		glVertex2d(0, 0);
-		glVertex2d(0.5, 0.5);
-		glVertex2d(0.5, 0);
-		glEnd();
-
-		//Swap buffers
-		glfwSwapBuffers(window);
-		//Get and organize events, like keyboard and mouse input, window resizing, etc...
 		glfwPollEvents();
+
+		timeAccumulator += glfwGetTime() - startTime;
 	}
+
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	float ratio;
+	//	int width, height;
+	//	glfwGetFramebufferSize(window, &width, &height);
+	//	ratio = width / (float)height;
+	//	glViewport(0, 0, width, height);
+
+	//	glClear(GL_COLOR_BUFFER_BIT);
+
+	//	double time = glfwGetTime();
+
+	//	std::cout << time << std::endl;
+
+	//	glBegin(GL_TRIANGLES);
+	//	glVertex2d(0, 0);
+	//	glVertex2d(0.5, 0.5);
+	//	glVertex2d(0.5, 0);
+	//	glEnd();
+
+	//	//Swap buffers
+	//	glfwSwapBuffers(window);
+	//	//Get and organize events, like keyboard and mouse input, window resizing, etc...
+	//	glfwPollEvents();
+	//}
 
 	//Close OpenGL window and terminate GLFW
 	glfwDestroyWindow(window);
