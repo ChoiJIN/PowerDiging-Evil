@@ -10,3 +10,7 @@ Screen::Screen()
 Screen::~Screen()
 {
 }
+
+void Screen::render()
+{
+}
