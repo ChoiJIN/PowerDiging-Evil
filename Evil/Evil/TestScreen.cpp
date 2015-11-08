@@ -1,7 +1,5 @@
 #include "TestScreen.h"
 
-
-
 TestScreen::TestScreen()
 {
 }
@@ -17,9 +15,10 @@ void TestScreen::update(double delta)
 
 void TestScreen::render()
 {
-	GS::debug.log("render");
-	glClearColor(1.0f, 0.3f, 0.3f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	Screen::render();
 
-	
+	int t[6] = {};
+	GLDraw::drawRoom(1.5, t);
+	//GLDraw::drawPlane(Vector3(-0.2, 0.2, 0), Vector3(0.2, 0.2, 0), Vector3(0.2, -0.2, 0), Vector3(-0.2, -0.2, 0));
+
 }

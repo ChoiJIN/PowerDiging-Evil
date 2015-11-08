@@ -1,51 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d5af26ea-a085-4f44-9642-1b8ae4e3e695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{b053e575-4f7c-4d86-a0f3-2c4dcfdbd394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{4b44baf1-144e-451b-891b-f60955ce5603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Game Model">
+      <UniqueIdentifier>{0de1cd32-79ed-491e-aefc-4d6497d91335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GLFW Wrapper">
+      <UniqueIdentifier>{90d81a95-70f0-4b0a-aee6-ff48f1259095}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Model">
+      <UniqueIdentifier>{b6d14dc0-14fe-4aee-aae8-055800548fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GLFW Wrapper">
+      <UniqueIdentifier>{7abea89b-866c-4d2b-849d-e76991ed5975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{68da7dc6-5046-41a6-9972-a09dbb390a51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GS.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GLApp.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Game Model</Filter>
     </ClCompile>
     <ClCompile Include="TestScreen.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Game Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GS.cpp">
+      <Filter>Source Files\Game Model</Filter>
+    </ClCompile>
+    <ClCompile Include="GLDraw.cpp">
+      <Filter>Source Files\GLFW Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="GLApp.cpp">
+      <Filter>Source Files\GLFW Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrices.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GLUtil.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Screen.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="date.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Debug.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Game Model</Filter>
     </ClInclude>
     <ClInclude Include="GS.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Model</Filter>
     </ClInclude>
-    <ClInclude Include="GLApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="date.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files\Game Model</Filter>
     </ClInclude>
     <ClInclude Include="TestScreen.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GLDraw.h">
+      <Filter>Header Files\GLFW Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="GLApp.h">
+      <Filter>Header Files\GLFW Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrices.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Vectors.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GLUtil.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

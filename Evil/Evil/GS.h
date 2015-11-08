@@ -1,6 +1,7 @@
 #pragma once
 #include <stack>
 #include "Debug.h"
+#include "Character.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ private:
 
 public:
 	static Debug debug;
+	static Character* character;
+	static double moveFactor;
 
 	static void loadGameOption();
 

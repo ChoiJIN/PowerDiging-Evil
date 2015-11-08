@@ -32,7 +32,7 @@ public:
 
 	inline string makeNewFilename()
 	{
-		return string("LOG" + getTimeString("%02d%02d%02d") + ".txt");
+		return string("log/LOG" + getTimeString("%02d%02d%02d") + ".txt");
 	}
 
 	inline string makeTimeHeader()

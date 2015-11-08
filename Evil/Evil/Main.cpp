@@ -18,9 +18,13 @@ int main(void)
 	if (app.init() == APP_INIT_ERROR)
 		return -1;
 
-	//Set a background color
 	TestScreen tes;
 	GLApp::getInstance()->pushScreen(&tes);
+
+	glMatrixMode(GL_PROJECTION);
+	glFrustum(-1.0, 1.0, -1.0, 1.0, 0.5, 100.0);
+
+	glMatrixMode(GL_MODELVIEW);
 
 	app.mainLoop();
 

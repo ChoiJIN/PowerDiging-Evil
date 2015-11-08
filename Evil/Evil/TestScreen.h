@@ -1,8 +1,9 @@
 #pragma once
 
-#include <GLFW/glfw3.h>
 #include "GS.h"
 #include "Screen.h"
+#include "GLDraw.h"
+
 class TestScreen :
 	public Screen
 {
@@ -10,7 +11,7 @@ public:
 	TestScreen();
 	~TestScreen();
 	
-	void update(double delta);
-	void render();
+	virtual void update(double delta);
+	virtual void render();
 };
 

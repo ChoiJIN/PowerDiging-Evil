@@ -149,18 +149,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="GLApp.cpp" />
+    <ClCompile Include="GLDraw.cpp" />
+    <ClCompile Include="GLUtil.cpp" />
     <ClCompile Include="GS.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Matrices.cpp" />
     <ClCompile Include="TestScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="date.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="GLApp.h" />
+    <ClInclude Include="GLDraw.h" />
+    <ClInclude Include="GLUtil.h" />
     <ClInclude Include="GS.h" />
+    <ClInclude Include="Matrices.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="TestScreen.h" />
+    <ClInclude Include="Vectors.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

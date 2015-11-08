@@ -71,7 +71,7 @@ int GLApp::init()
 void GLApp::mainLoop()
 {
 	//Main Loop
-	double deltaTime = 1 / 30.0; // in seconds
+	const double deltaTime = 1 / 30.0; // in seconds
 	double timeAccumulator = 0;
 
 	// while문 한 번이 한 프레임
@@ -126,6 +126,18 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
+
+	// move
+	switch (key) {
+		case GLFW_KEY_A:
+			break;
+		case GLFW_KEY_D:
+			break;
+		case GLFW_KEY_W:
+			break;
+		case GLFW_KEY_S:
+			break;
+	}
 }
 
 void GLApp::buttonCallback(GLFWwindow * window, int button, int action, int mode)
