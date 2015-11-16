@@ -126,16 +126,20 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
-
+	float moveSpeed = 0.4;
 	// move
 	switch (key) {
 		case GLFW_KEY_A:
+			GS::character->moveCameraRL(moveSpeed);
 			break;
 		case GLFW_KEY_D:
+			GS::character->moveCameraRL(-moveSpeed);
 			break;
 		case GLFW_KEY_W:
+			GS::character->moveCameraFB(moveSpeed);
 			break;
 		case GLFW_KEY_S:
+			GS::character->moveCameraFB(-moveSpeed);
 			break;
 	}
 }
@@ -152,5 +156,16 @@ void GLApp::buttonCallback(GLFWwindow * window, int button, int action, int mode
 
 void GLApp::cursorCallback(GLFWwindow * window, double x, double y)
 {
+	static bool just_warped = false;
+
+	if (just_warped) {
+		just_warped = false;
+		return;
+	}
+
+	GS::character->rotateCamera(x, y);
 	GS::debug.log(to_string(x) + ", " + to_string(y));
+
+	glfwSetCursorPos(window, 300, 300);
+	just_warped = true;
 }

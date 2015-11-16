@@ -37,6 +37,7 @@ private:
 	static GLApp* instance;
 	GLFWwindow* window;
 	stack<Screen*> screenStk;
+	
 
 };
 
