@@ -14,6 +14,9 @@ using namespace std;
 class GLApp
 {
 public:
+	static const int WIDTH = 600;
+	static const int HEIGHT = 600;
+
 	GLApp();
 	~GLApp();
 
@@ -24,7 +27,7 @@ public:
 
 	/* Screen */
 	void pushScreen(Screen* screen);
-	void popScreen(Screen* screen);
+	void popScreen();
 
 	/* GLFW Callbacks */
 	static void errorCallback(int error, const char* description);

@@ -35,7 +35,7 @@ int GLApp::init()
 		exit(EXIT_FAILURE);
 	}
 
-	window = glfwCreateWindow(600, 600, "Test Window", NULL, NULL);
+	window = glfwCreateWindow(WIDTH, HEIGHT, "Test Window", NULL, NULL);
 
 	if (!window)
 	{
@@ -111,8 +111,9 @@ void GLApp::pushScreen(Screen* screen)
 	screenStk.push(screen);
 }
 
-void GLApp::popScreen(Screen* screen)
+void GLApp::popScreen()
 {
+	screenStk.pop();
 }
 
 void GLApp::errorCallback(int error, const char * description)
