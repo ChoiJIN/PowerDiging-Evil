@@ -2,8 +2,10 @@
 
 //#include "GLApp.h"
 #include <GLFW\glfw3.h>
+#include <vector>
 
 #include "Character.h"
+#include "Object.h"
 #include "Matrices.h"
 #include "GLUtil.h"
 
@@ -23,6 +25,11 @@ public:
 	virtual void update(double delta) = 0
 	{
 		//cout << "Screen.h의 update(delta)" << endl;
+		// 여기에서 object들의 collision detection과 animation을 수행
+
+		for (size_t i = 0; i < objs.size(); i++) {
+
+		}
 	}
 
 	virtual void render() = 0
@@ -39,4 +46,6 @@ public:
 	}
 
 private:
+	std::vector<Object> objs;
+
 };

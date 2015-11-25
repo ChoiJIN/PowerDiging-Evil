@@ -86,7 +86,7 @@ void GLApp::mainLoop()
 		double startTime = glfwGetTime();
 
 		// 이전 프레임에서 현재 프레임까지 걸린 시간이
-		// 미리 설정한 delta time만큼 흘렀을때만 연산
+		// 미리 설정한 delta time이상 흘렀을때만 연산
 		while (timeAccumulator >= deltaTime)
 		{
 			screenStk.top()->update(deltaTime);
@@ -127,7 +127,7 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
-	float moveSpeed = 0.4;
+	double moveSpeed = 0.4;
 	// move
 	switch (key) {
 		case GLFW_KEY_A:

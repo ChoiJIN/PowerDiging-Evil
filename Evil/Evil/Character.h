@@ -21,7 +21,7 @@ public:
 private:
 	Vector3 position;
 	Vector3 look;
-	double lastX, lastY;
+	float lastX, lastY;
 	float posX, posY, posZ;
 	float lookX, lookY, lookZ;
 	float yaw, pitch;

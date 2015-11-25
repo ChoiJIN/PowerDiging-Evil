@@ -156,6 +156,7 @@
     <ClCompile Include="GS.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Matrices.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="TestScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="GLUtil.h" />
     <ClInclude Include="GS.h" />
     <ClInclude Include="Matrices.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="TestScreen.h" />
     <ClInclude Include="Vectors.h" />
