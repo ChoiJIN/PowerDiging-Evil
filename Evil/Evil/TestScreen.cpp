@@ -18,7 +18,7 @@ void TestScreen::render()
 	Screen::render();
 
 	int t[6] = {};
-	GLDraw::drawRoom(20.0, t);
+	GLDraw::drawRoom(200.0, t);
 	//GLDraw::drawPlane(Vector3(-0.2, 0.2, 0), Vector3(0.2, 0.2, 0), Vector3(0.2, -0.2, 0), Vector3(-0.2, -0.2, 0));
 
 }

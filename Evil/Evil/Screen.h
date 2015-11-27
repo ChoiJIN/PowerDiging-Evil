@@ -25,7 +25,7 @@ public:
 		//cout << "Screen.h의 update(delta)" << endl;
 	}
 
-	virtual void render() = 0 
+	virtual void render() = 0
 	{
 		//cout << "Screen.h의 render()" << endl;
 		//cout << "여기에 모든 Screen에서 적용할 model, view 행렬을 호출하면 된다." << endl;
@@ -35,7 +35,12 @@ public:
 
 		glMatrixMode(GL_MODELVIEW);
 		Matrix4 look = GLUtil::LookAt(GS::character->getPosition(), GS::character->getLook(), Vector3(0, 1, 0));
-		glLoadMatrixf(look.get());
+		Matrix4 perspective = GLUtil::perspective(90, 1, 0.01, 1000.0);
+		glLoadIdentity();
+		glMultMatrixf(perspective.get());
+		glMultMatrixf(look.get());
+		//		glLoadMatrixf(look.get());
+
 	}
 
 private:

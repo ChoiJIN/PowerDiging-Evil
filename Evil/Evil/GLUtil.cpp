@@ -16,3 +16,44 @@ Matrix4 GLUtil::LookAt(const Vector3 & eye, const Vector3 & at, const Vector3 & 
 	meye.translate(-eye);
 	return c * meye;
 }
+
+Matrix4 GLUtil::perspective(float fovy, float aspect, float n, float f)
+{
+	float q = 1.0f / tan(radians(0.5f * fovy));
+	float A = q / aspect;
+	float B = (n + f) / (n - f);
+	float C = (2.0f * n * f) / (n - f);
+
+	Matrix4 result(
+		A, 0.0f, 0.0f, 0.0f,
+		0.0f, q, 0.0f, 0.0f,
+		0.0f, 0.0f, B, -1.0f,
+		0.0f, 0.0f, C, 0.0f);
+
+	//	result[0] = Vector4(A, 0.0f, 0.0f, 0.0f);
+	//	result[1] = Vector4(0.0f, q, 0.0f, 0.0f);
+	//	result[2] = Vector4(0.0f, 0.0f, B, -1.0f);
+	//	result[3] = Vector4(0.0f, 0.0f, C, 0.0f);
+
+	return result;
+}
+
+Matrix4 GLUtil::frustum(float left, float right, float bottom, float top, float n, float f)
+{
+	Matrix4 result;
+	result.identity();
+
+	if ((right == left) ||
+		(top == bottom) ||
+		(n == f) ||
+		(n < 0.0) ||
+		(f < 0.0))
+		return result;
+
+	result = Matrix4(
+		(2.0f * n) / (right - left), 0.0f, 0.0f, 0.0f,
+		0.0f, (2.0f * n) / (top - bottom), 0.0f, 0.0f,
+		(right + left) / (right - left), (top + bottom) / (top - bottom), -(f + n) / (f - n), -1.0f,
+		0.0f, 0.0f, -(2.0f * f * n) / (f - n), 0.0f);
+	return result;
+}
