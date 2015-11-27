@@ -53,6 +53,9 @@
     <ClCompile Include="GLUtil.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Game Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h">
@@ -87,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="GLUtil.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Game Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

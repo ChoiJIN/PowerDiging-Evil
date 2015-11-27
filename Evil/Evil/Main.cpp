@@ -21,10 +21,6 @@ int main(void)
 	TestScreen tes;
 	GLApp::getInstance()->pushScreen(&tes);
 
-	//	glMatrixMode(GL_PROJECTION);
-	//	gluPerspective(45, 1, 0.1, 100.0);
-	//	glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 100.0);
-
 	glMatrixMode(GL_MODELVIEW);
 
 	app.mainLoop();

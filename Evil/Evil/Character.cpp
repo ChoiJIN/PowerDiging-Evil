@@ -23,12 +23,12 @@ Character::~Character()
 
 void Character::RefreshCamera() {
 
-	lookX = cos(yaw) * cos(pitch);
-	lookY = sin(pitch);
-	lookZ = sin(yaw) * cos(pitch);
+	lookX = cosf(yaw) * cosf(pitch);
+	lookY = sinf(pitch);
+	lookZ = sinf(yaw) * cosf(pitch);
 
-	strafe_lx = cos(yaw - M_PI_2);
-	strafe_lz = sin(yaw - M_PI_2);
+	strafe_lx = cosf(yaw - (float)M_PI_2);
+	strafe_lz = sinf(yaw - (float)M_PI_2);
 
 	position = Vector3(posX, posY, posZ);
 	look = Vector3(position.x + lookX, position.y + lookY, position.z + lookZ);
@@ -57,10 +57,10 @@ void Character::moveCameraRL(float incrs) {
 
 void Character::rotateCamera(double mouseX, double mouseY)
 {
-	const float limit = 30.0 * M_PI / 180.0;
-		float g_rotation_speed = M_PI / 180 * 0.2;
-		float diffX = (mouseX - 300);
-		float diffY = (mouseY - 300);
+	const float limit = 30.0f * (float)M_PI / 180.0f;
+		float g_rotation_speed = (float)M_PI / 180 * 0.2f;
+		float diffX = (float)(mouseX - 300);
+		float diffY = (float)(mouseY - 300);
 
 		diffX *= g_rotation_speed;
 		diffY *= g_rotation_speed;
