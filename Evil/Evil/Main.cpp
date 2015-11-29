@@ -14,6 +14,13 @@
 
 int main(void)
 {
+	GameOption option;
+	option.roomSize = 20;
+	option.characterHeight = 2;
+
+	GS::option = option;
+	GS::character = new Character();
+
 	GLApp app;
 	if (app.init() == APP_INIT_ERROR)
 		return -1;

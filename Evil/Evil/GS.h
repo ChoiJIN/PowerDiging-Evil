@@ -5,22 +5,21 @@
 
 using namespace std;
 
-class GameOption {
-public:
+struct GameOption {
 	size_t screenLimit;
+	float roomSize;
+	float characterHeight;
 };
 
 class GS {
 private:
 	static bool gameEnd;
-	static GameOption gameOption;
 
 public:
+	static GameOption option;
 	static Debug debug;
 	static Character* character;
 	static double moveFactor;
-
-	static void loadGameOption();
 
 	static bool isGameEnd()
 	{

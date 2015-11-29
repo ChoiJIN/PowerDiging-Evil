@@ -47,12 +47,14 @@ public:
 		glMultMatrixf(perspective.get());
 		glMultMatrixf(look.get());
 
+		glTranslatef(0, -GS::option.roomSize, 0);
 		for (size_t i = 0; i < objs.size(); i++) {
-
+			objs[i].draw();
 		}
+		glTranslatef(0, GS::option.roomSize, 0);
 	}
 
-private:
+protected:
 	std::vector<Object> objs;
 
 };

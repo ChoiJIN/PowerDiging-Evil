@@ -20,11 +20,21 @@ void Object::loadObj(string fileName)
 
 void Object::draw()
 {
+	glTranslatef(position.x, position.y, position.z);
 	loader.Draw();
+	glTranslatef(-position.x, -position.y, -position.z);
 }
 
 void Object::use()
 {
+}
+
+void Object::setPosition(float x, float y, float z)
+{
+	this->position.x = x;
+	this->position.y = y;
+	this->position.z = z;
+
 }
 
 

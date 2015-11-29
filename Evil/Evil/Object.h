@@ -9,9 +9,8 @@ using namespace std;
 class Object
 {
 private:
-	string id;
-	GLuint texture = 0;
 	CObjLoader loader;
+	Vector3 position;
 
 public:
 	Object();
@@ -22,5 +21,7 @@ public:
 	void draw();
 
 	void use();
+
+	void setPosition(float x, float y, float z);
 };
 
