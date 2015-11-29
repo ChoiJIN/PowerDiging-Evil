@@ -56,6 +56,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source Files\Game Model</Filter>
     </ClCompile>
+    <ClCompile Include="ObjLoader.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h">
@@ -93,6 +96,12 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Header Files\Game Model</Filter>
+    </ClInclude>
+    <ClInclude Include="GLCube.h">
+      <Filter>Header Files\GLFW Wrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLoader.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

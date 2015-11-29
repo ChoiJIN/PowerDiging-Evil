@@ -65,7 +65,16 @@ int GLApp::init()
 		return -1;
 	}
 
+	glSetting();
+
 	return 0;
+}
+
+void GLApp::glSetting()
+{
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
 void GLApp::mainLoop()
@@ -127,7 +136,7 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
-	double moveSpeed = 0.4;
+	float moveSpeed = 0.4f;
 	// move
 	switch (key) {
 		case GLFW_KEY_A:
@@ -165,7 +174,7 @@ void GLApp::cursorCallback(GLFWwindow * window, double x, double y)
 	}
 
 	GS::character->rotateCamera(x, y);
-	GS::debug.log(to_string(x) + ", " + to_string(y));
+	//GS::debug.log(to_string(x) + ", " + to_string(y));
 
 	glfwSetCursorPos(window, 300, 300);
 	just_warped = true;

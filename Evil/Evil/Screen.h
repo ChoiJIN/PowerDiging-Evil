@@ -38,14 +38,18 @@ public:
 		//cout << "여기에 모든 Screen에서 적용할 model, view 행렬을 호출하면 된다." << endl;
 
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glMatrixMode(GL_MODELVIEW);
 		Matrix4 look = GLUtil::LookAt(GS::character->getPosition(), GS::character->getLook(), Vector3(0, 1, 0));
-		Matrix4 perspective = GLUtil::perspective(90, 1, 0.01, 1000.0);
+		Matrix4 perspective = GLUtil::perspective(90, 1, 0.01f, 1000.0f);
 		glLoadIdentity();
 		glMultMatrixf(perspective.get());
 		glMultMatrixf(look.get());
+
+		for (size_t i = 0; i < objs.size(); i++) {
+
+		}
 	}
 
 private:

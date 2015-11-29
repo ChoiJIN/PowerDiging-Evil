@@ -23,6 +23,7 @@ public:
 	static GLApp* getInstance();
 
 	int init();
+	void glSetting();
 	void mainLoop();
 
 	/* Screen */
