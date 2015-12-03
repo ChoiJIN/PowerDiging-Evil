@@ -6,6 +6,13 @@ TestScreen::TestScreen()
 	// object initializtion
 	objs.push_back(Object());
 	objs[0].loadObj("apple");
+	objs.push_back(Object(Vector3(10, 0, 0)));
+	objs[1].loadObj("apple");
+
+//				cout << "오브젝트 박스의 무게 중심 = " << objs[0].get_box().get_cog() << endl;
+//				cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
+//				cout << "오브젝트 박스의 무게 중심 = " << objs[1].get_box().get_cog() << endl;
+//				cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 //	obj.loadObj("apple");
 }
 
@@ -29,11 +36,11 @@ void TestScreen::update(double delta)
 			|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 		{
 			cout << "objs[" << i << "] 충돌 감지" << endl;
-//			cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-//			cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
+			cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
+			cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 		}
-		cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-		cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
+//		cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
+//		cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 
 	}
 }
@@ -54,7 +61,9 @@ void TestScreen::render()
 	glMultMatrixf(look.get());
 
 	for (size_t i = 0; i < objs.size(); i++) {
-
+		glMultMatrixf(objs[i].get_matrix().get());
+		objs[i].draw();
+		glMultMatrixf(objs[i].get_matrix().invert().get());
 	}
 
 	int t[6] = {};
@@ -64,7 +73,6 @@ void TestScreen::render()
 	/*GLCube cube;
 	cube.draw();*/
 
-	objs[0].draw();
 //	obj.draw();
 
 	//cout << GS::character->getLook() << endl;

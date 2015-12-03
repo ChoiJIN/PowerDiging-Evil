@@ -5,5 +5,5 @@ ebp=317EB7A3 esp=0028F6FC program=C:\Program Files (x86)\Git\bin\sh.exe
 cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
 Stack trace:
 Frame     Function  Args
-  11696 [main] sh.exe" 9804 handle_exceptions: Exception: STATUS_ACCESS_VIOLATION
-  13678 [main] sh.exe" 9804 handle_exceptions: Error while dumping state (probably corrupted stack)
+  12456 [main] sh.exe" 2584 handle_exceptions: Exception: STATUS_ACCESS_VIOLATION
+  14386 [main] sh.exe" 2584 handle_exceptions: Error while dumping state (probably corrupted stack)

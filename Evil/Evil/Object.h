@@ -13,6 +13,7 @@ private:
 	string id;
 	GLuint texture = 0;
 	Vector3 cog;
+	Matrix4 obj_matrix;
 	Box Collision_Box;
 	CObjLoader loader;
 	unsigned char type; // 충돌할 경우 데미지를 주는 타입인지, 아닌지를 확인해야 한다.
@@ -31,5 +32,7 @@ public:
 	void use();
 
 	Box get_box();
+
+	Matrix4 get_matrix();
 };
 

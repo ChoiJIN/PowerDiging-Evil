@@ -5,13 +5,16 @@
 Object::Object()
 {
 	cog = Vector3(0.f, 0.f, 0.f);
+	obj_matrix.identity();
 	Collision_Box = Box(cog, 2, 2, 2);
 }
 
 Object::Object(Vector3 center)
 {
 	cog = center;
-	Collision_Box = Box(center, 2, 2, 2);
+	obj_matrix.identity();
+	obj_matrix.translate(center);
+	Collision_Box = Box(cog, 2, 2, 2);
 }
 
 Object::~Object()
@@ -42,4 +45,9 @@ void Object::use()
 Box Object::get_box()
 {
 	return Collision_Box;
+}
+
+Matrix4 Object::get_matrix()
+{
+	return obj_matrix;
 }
