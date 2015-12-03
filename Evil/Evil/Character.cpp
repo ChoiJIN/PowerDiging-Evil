@@ -9,6 +9,7 @@
 Character::Character()
 {
 	position = Vector3(0, 0, 0);
+	Collision_Box = Box(position, 4, 4, 4);
 	look = Vector3(0, 0, 1);
 	posX = 0;
 	posY = 0;
@@ -41,8 +42,9 @@ void Character::moveCameraFB(float incrs) {
 	float lz = sin(yaw) * cos(pitch);
 
 	posX = posX + incrs*lx;
-	posY = posY + incrs*ly;
+//	posY = posY + incrs*ly;
 	posZ = posZ + incrs*lz;
+	Collision_Box.move_box(Vector3(incrs*lx, 0, incrs*lz));
 
 	RefreshCamera();
 }
@@ -50,10 +52,23 @@ void Character::moveCameraRL(float incrs) {
 
 	posX = posX + incrs*strafe_lx;
 	posZ = posZ + incrs*strafe_lz;
+	Collision_Box.move_box(Vector3(incrs*strafe_lx, 0, incrs*strafe_lz));
 
 	RefreshCamera();
 }
 
+Box Character::get_box()
+{
+	return Collision_Box;
+}
+
+bool Character::collision_check(Box B, Vector3 delta)
+{
+	if (Collision_Box.collision_detection_3D(B, delta))
+		return true;
+	else
+		return false;
+}
 
 void Character::rotateCamera(double mouseX, double mouseY)
 {

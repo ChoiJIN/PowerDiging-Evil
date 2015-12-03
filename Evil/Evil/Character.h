@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matrices.h"
+#include "Box.h"
 
 class Character
 {
@@ -13,6 +14,8 @@ public:
 	void rotateCamera(double mouseX, double mouseY);
 	void moveCameraFB(float incrs);
 	void moveCameraRL(float incrs);
+	Box get_box();
+	bool collision_check(Box B, Vector3 delta);
 
 
 	const Vector3& getPosition() const;
@@ -21,6 +24,8 @@ public:
 private:
 	Vector3 position;
 	Vector3 look;
+	Box Collision_Box;
+	bool front_move, back_move, left_move, right_move = true;
 	float lastX, lastY;
 	float posX, posY, posZ;
 	float lookX, lookY, lookZ;

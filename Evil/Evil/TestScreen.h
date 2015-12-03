@@ -11,7 +11,7 @@ class TestScreen :
 	public Screen
 {
 private:
-	Object obj;
+//	Object obj;
 
 public:
 	TestScreen();

@@ -59,6 +59,9 @@
     <ClCompile Include="ObjLoader.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>Source Files\Game Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="date.h">
@@ -102,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="ObjLoader.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>Header Files\Game Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
