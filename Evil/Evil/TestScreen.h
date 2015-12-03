@@ -10,8 +10,6 @@
 class TestScreen :
 	public Screen
 {
-private:
-//	Object obj;
 
 public:
 	TestScreen();

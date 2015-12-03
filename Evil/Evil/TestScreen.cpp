@@ -3,6 +3,7 @@
 
 TestScreen::TestScreen()
 {
+	Object obj;
 	// object initializtion
 	objs.push_back(Object());
 	objs[0].loadObj("apple");
@@ -67,13 +68,11 @@ void TestScreen::render()
 	}
 
 	int t[6] = {};
-	//GLDraw::room(200.0, t);
+	GLDraw::room(GS::option.roomSize, t);
 	//GLDraw::drawPlane(Vector3(-0.2, 0.2, 0), Vector3(0.2, 0.2, 0), Vector3(0.2, -0.2, 0), Vector3(-0.2, -0.2, 0));
 
 	/*GLCube cube;
 	cube.draw();*/
-
-//	obj.draw();
 
 	//cout << GS::character->getLook() << endl;
 }

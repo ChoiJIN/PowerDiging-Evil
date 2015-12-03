@@ -6,14 +6,6 @@
 #include <iostream>
 #include <fstream>
 
-//#pragma comment(lib, "opencv_ts300d.lib")
-#ifdef _DEBUG
-#pragma comment(lib, "opencv_world300d.lib")
-#else
-#pragma comment(lib, "opencv_world300.lib")
-#endif
-
-
 // Game Library
 #include "GLApp.h"
 #include "GS.h"
@@ -22,6 +14,13 @@
 
 int main(void)
 {
+	GameOption option;
+	option.roomSize = 20;
+	option.characterHeight = 2;
+
+	GS::option = option;
+	GS::character = new Character();
+
 	GLApp app;
 	if (app.init() == APP_INIT_ERROR)
 		return -1;

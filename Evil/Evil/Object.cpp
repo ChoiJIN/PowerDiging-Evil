@@ -35,7 +35,9 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
+	glTranslatef(cog.x, cog.y, cog.z);
 	loader.Draw();
+	glTranslatef(-cog.x, -cog.y, -cog.z);
 }
 
 void Object::use()
