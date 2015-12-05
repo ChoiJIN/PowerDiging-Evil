@@ -12,9 +12,6 @@ Character::Character()
 	position = Vector3(0, initialY, 0);
 	look = Vector3(0, initialY, 1);
 	Collision_Box = Box(position, 4, 4, 4);
-	posX = 0;
-	posY = initialY;
-	posZ = 0;
 	yaw = 0.0;
 	pitch = 0.0;
 }
@@ -25,15 +22,14 @@ Character::~Character()
 
 void Character::RefreshCamera() {
 
-	lookX = cos(yaw) * cos(pitch);
-	lookY = sin(pitch);
-	lookZ = sin(yaw) * cos(pitch);
+	look.x = cos(yaw) * cos(pitch);
+	look.y = sin(pitch);
+	look.z = sin(yaw) * cos(pitch);
 
 	strafe_lx = cos(yaw - (float)M_PI_2);
 	strafe_lz = sin(yaw - (float)M_PI_2);
 
-	position = Vector3(posX, posY, posZ);
-	look = Vector3(position.x + lookX, position.y + lookY, position.z + lookZ);
+	look = Vector3(position.x + look.x, position.y + look.y, position.z + look.z);
 }
 
 void Character::moveCameraFB(float incrs) {
@@ -42,17 +38,17 @@ void Character::moveCameraFB(float incrs) {
 	float ly = sin(pitch);
 	float lz = sin(yaw) * cos(pitch);
 
-	posX = posX + incrs*lx;
+	position.x = position.x + incrs*lx;
 	//posY = posY + incrs*ly;
-	posZ = posZ + incrs*lz;
+	position.z= position.z + incrs*lz;
 	Collision_Box.move_box(Vector3(incrs*lx, 0, incrs*lz));
 
 	RefreshCamera();
 }
 void Character::moveCameraRL(float incrs) {
 
-	posX = posX + incrs*strafe_lx;
-	posZ = posZ + incrs*strafe_lz;
+	position.x = position.x + incrs*strafe_lx;
+	position.z = position.z + incrs*strafe_lz;
 	Collision_Box.move_box(Vector3(incrs*strafe_lx, 0, incrs*strafe_lz));
 
 	RefreshCamera();

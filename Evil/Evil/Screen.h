@@ -16,6 +16,7 @@ class Screen
 public:
 	Screen()
 	{
+		character = GS::character;
 	}
 
 	virtual ~Screen()
@@ -74,6 +75,7 @@ public:
 	}
 
 protected:
+	Character* character;
 	std::vector<Object> objs;
 
 };

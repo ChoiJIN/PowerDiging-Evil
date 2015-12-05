@@ -20,18 +20,19 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
+	//GS::debug.log(to_string());
 }
 
 void TestScreen::render()
 {
 	Screen::render();
 	GLuint t[6] = { 
-		ImageLoader::getTextureId("back_wall.png"),
-		ImageLoader::getTextureId("side_wall.png"),
-		ImageLoader::getTextureId("front_wall.png"),
-		ImageLoader::getTextureId("side_wall.png"),
-		ImageLoader::getTextureId("bottom_wall.png"),
-		ImageLoader::getTextureId("top_wall.png")
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick_door.jpg"),
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick_bottom.jpg"),
+		ImageLoader::getTextureId("brick.jpg")
 	};
 	GLDraw::room(GS::option.roomSize, t);
 }

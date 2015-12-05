@@ -19,7 +19,7 @@ int main(void)
 {
 	GameOption option;
 	option.roomSize = 20;
-	option.characterHeight = 2;
+	option.characterHeight = 3;
 
 	GS::option = option;
 	GS::character = new Character();
@@ -30,13 +30,15 @@ int main(void)
 
 	TestScreen tes;
 	GLApp::getInstance()->pushScreen(&tes);
-	//GLApp::getInstance()->loadTexture("test.png");
 	ImageLoader::loadTexture("test.png");
 	ImageLoader::loadTexture("front_wall.png");
 	ImageLoader::loadTexture("back_wall.png");
 	ImageLoader::loadTexture("side_wall.png");
 	ImageLoader::loadTexture("top_wall.png");
 	ImageLoader::loadTexture("bottom_wall.png");
+	ImageLoader::loadTexture("brick.jpg");
+	ImageLoader::loadTexture("brick_door.jpg");
+	ImageLoader::loadTexture("brick_bottom.jpg");
 
 	glMatrixMode(GL_MODELVIEW);
 
