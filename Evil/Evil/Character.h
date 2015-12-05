@@ -24,11 +24,19 @@ public:
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;
 
+	void setFrontMove(bool b);
+	void setBackMove(bool b);
+	void setLeftMove(bool b);
+	void setRightMove(bool b);
+
 private:
 	Vector3 position;
 	Vector3 look;
 	Box Collision_Box;
-	bool front_move, back_move, left_move, right_move = true;
+	bool front_move = false;
+	bool back_move = false;
+	bool left_move = false;
+	bool right_move = false;
 	unsigned char state = 0, Life = 5;
 	float lastX, lastY;
 	float yaw, pitch;

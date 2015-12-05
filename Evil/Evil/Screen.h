@@ -27,6 +27,8 @@ public:
 
 	virtual void update(double delta) = 0
 	{
+		character->RefreshCamera();
+
 		currentTime = time(NULL);
 
 		if (GS::character->getLife() == 0)

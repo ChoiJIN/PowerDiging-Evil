@@ -21,6 +21,14 @@ Character::~Character()
 }
 
 void Character::RefreshCamera() {
+	if (front_move)
+		moveCameraFB(GS::moveSpeed);
+	if (back_move)
+		moveCameraFB(-GS::moveSpeed);
+	if (left_move)
+		moveCameraRL(GS::moveSpeed);
+	if (right_move)
+		moveCameraRL(-GS::moveSpeed);
 
 	look.x = cos(yaw) * cos(pitch);
 	look.y = sin(pitch);
@@ -39,19 +47,14 @@ void Character::moveCameraFB(float incrs) {
 	float lz = sin(yaw) * cos(pitch);
 
 	position.x = position.x + incrs*lx;
-	//posY = posY + incrs*ly;
-	position.z= position.z + incrs*lz;
+	position.z = position.z + incrs*lz;
 	Collision_Box.move_box(Vector3(incrs*lx, 0, incrs*lz));
-
-	RefreshCamera();
 }
 void Character::moveCameraRL(float incrs) {
 
 	position.x = position.x + incrs*strafe_lx;
 	position.z = position.z + incrs*strafe_lz;
 	Collision_Box.move_box(Vector3(incrs*strafe_lx, 0, incrs*strafe_lz));
-
-	RefreshCamera();
 }
 
 Box Character::get_box()
@@ -86,8 +89,6 @@ void Character::rotateCamera(double mouseX, double mouseY)
 
 	if (pitch > limit)
 		pitch = limit;
-
-	RefreshCamera();
 }
 
 void Character::printState()
@@ -131,4 +132,25 @@ const Vector3& Character::getPosition() const
 const Vector3 & Character::getLook() const
 {
 	return look;
+}
+
+void Character::setFrontMove(bool b)
+{
+	front_move = b;
+}
+
+void Character::setBackMove(bool b)
+{
+	back_move = b;
+
+}
+
+void Character::setLeftMove(bool b)
+{
+	left_move = b;
+}
+
+void Character::setRightMove(bool b)
+{
+	right_move = b;
 }
