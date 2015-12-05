@@ -38,6 +38,7 @@ public:
 	bool getTracking();
 
 	void trackpos(Vector3 vec);
+	Vector3 get_trackposition();
 
 	Box get_box();
 

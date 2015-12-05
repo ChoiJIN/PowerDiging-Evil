@@ -10,6 +10,7 @@ TestScreen::TestScreen()
 	objs.push_back(Object(Vector3(10, -18, 0)));
 	objs[1].loadObj("apple");
 	objs[1].setTracking(true);
+	objs[1].trackpos(character->getPosition());
 }
 
 
@@ -20,7 +21,8 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
-	objs[1].trackpos(character->getPosition());
+	if((objs[1].get_trackposition() - objs[1].get_box().get_cog()).length() < 1)
+		objs[1].trackpos(character->getPosition());
 }
 
 void TestScreen::render()
