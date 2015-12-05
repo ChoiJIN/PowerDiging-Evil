@@ -18,6 +18,7 @@ class Screen
 public:
 	Screen()
 	{
+		character = GS::character;
 	}
 
 	virtual ~Screen()
@@ -28,32 +29,21 @@ public:
 	{
 		currentTime = time(NULL);
 
-		if(GS::character->getLife() == 0)
+		if (GS::character->getLife() == 0)
 			GS::setGameEnd(true);
-		//cout << "Screen.h의 update(delta)" << endl;
-		// 여기에서 object들의 collision detection과 animation을 수행
 
-		//		cout << "Screen update" << endl;
-		//		cout << "obj size = " << objs.size() << endl;
 		for (size_t i = 0; i < objs.size(); i++)
 		{
-			//		cout << objs[i].get_box().get_cog() << endl;
-			//		cout << GS::character->get_box().get_cog() << endl;
 			if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
 				|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 			{
 				if (objs[i].getTracking() && (currentTime - crashTime) > 2)
-				{ 
+				{
 					crashTime = currentTime;
 					GS::character->setLife(GS::character->getLife() - 1);
 					cout << "현재 라이프 = " << (int)GS::character->getLife() << endl;
 				}
-//				cout << "objs[" << i << "] 충돌 감지" << endl;
-				//			cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-				//			cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 			}
-			//		cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-			//		cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 
 		}
 	}
@@ -74,13 +64,14 @@ public:
 		glMultMatrixf(look.get());
 
 		for (size_t i = 0; i < objs.size(); i++) {
-//			glMultMatrixf(objs[i].get_matrix().get());
+			//			glMultMatrixf(objs[i].get_matrix().get());
 			objs[i].draw();
-//			glMultMatrixf(objs[i].get_matrix().invert().get());
+			//			glMultMatrixf(objs[i].get_matrix().invert().get());
 		}
 	}
 
 protected:
+	Character* character;
 	std::vector<Object> objs;
 
 private:

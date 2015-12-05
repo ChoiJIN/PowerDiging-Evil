@@ -31,8 +31,6 @@ private:
 	bool front_move, back_move, left_move, right_move = true;
 	unsigned char state = 0, Life = 5;
 	float lastX, lastY;
-	float posX, posY, posZ;
-	float lookX, lookY, lookZ;
 	float yaw, pitch;
 	float strafe_lx, strafe_lz;
 };

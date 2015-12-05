@@ -5,18 +5,21 @@
 // Standard Library
 #include <iostream>
 #include <fstream>
+#include <map>
 
 // Game Library
 #include "GLApp.h"
 #include "GS.h"
+#include "ImageLoader.h"
 
 #include "TestScreen.h"
+using namespace std;
 
 int main(void)
 {
 	GameOption option;
 	option.roomSize = 20;
-	option.characterHeight = 2;
+	option.characterHeight = 3;
 
 	GS::option = option;
 	GS::character = new Character();
@@ -27,6 +30,9 @@ int main(void)
 
 	TestScreen tes;
 	GLApp::getInstance()->pushScreen(&tes);
+	ImageLoader::loadTexture("brick.jpg");
+	ImageLoader::loadTexture("brick_door.jpg");
+	ImageLoader::loadTexture("brick_bottom.jpg");
 
 	glMatrixMode(GL_MODELVIEW);
 

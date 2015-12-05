@@ -1,5 +1,6 @@
 #include "TestScreen.h"
 
+#include "ImageLoader.h"
 
 TestScreen::TestScreen()
 {
@@ -25,19 +26,19 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
-	objs[1].trackpos(GS::character->getPosition());
+	objs[1].trackpos(character->getPosition());
 }
 
 void TestScreen::render()
 {
 	Screen::render();
-
-	int t[6] = {};
+	GLuint t[6] = { 
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick_door.jpg"),
+		ImageLoader::getTextureId("brick.jpg"),
+		ImageLoader::getTextureId("brick_bottom.jpg"),
+		ImageLoader::getTextureId("brick.jpg")
+	};
 	GLDraw::room(GS::option.roomSize, t);
-	//GLDraw::drawPlane(Vector3(-0.2, 0.2, 0), Vector3(0.2, 0.2, 0), Vector3(0.2, -0.2, 0), Vector3(-0.2, -0.2, 0));
-
-	/*GLCube cube;
-	cube.draw();*/
-
-	//cout << GS::character->getLook() << endl;
 }
