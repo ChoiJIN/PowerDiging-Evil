@@ -20,6 +20,30 @@ Character::~Character()
 {
 }
 
+void Character::loadCinematic(string fileName) {
+	string cineName = fileName + ".txt";
+	loader.Load(cineName.c_str());
+}
+
+void Character::alreadyWatched() {
+	watched = true;
+}
+
+bool Character::getWatched() {
+	return watched;
+}
+
+void Character::playCinematic() {
+	if (loader.returnVectorSize() > currentFrame) {
+		loader.returnVertexes(currentFrame);
+		position.x = loader.getposX();
+		position.z = loader.getposZ();
+		yaw = loader.getYaw();
+		pitch = loader.getPitch();
+		currentFrame++;
+	}
+}
+
 void Character::RefreshCamera() {
 	if (front_move)
 		moveCameraFB(GS::moveSpeed);
@@ -38,6 +62,19 @@ void Character::RefreshCamera() {
 	strafe_lz = sin(yaw - (float)M_PI_2);
 
 	look = Vector3(position.x + look.x, position.y + look.y, position.z + look.z);
+}
+
+void Character::showCameraPosition() {
+	cout << yaw << " " << pitch << " " << endl;
+}
+float Character::getposX() {
+	return position.x;
+}
+float Character::getposY() {
+	return position.y;
+}
+float Character::getposZ() {
+	return position.z;
 }
 
 void Character::moveCameraFB(float incrs) {
@@ -142,7 +179,6 @@ void Character::setFrontMove(bool b)
 void Character::setBackMove(bool b)
 {
 	back_move = b;
-
 }
 
 void Character::setLeftMove(bool b)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Matrices.h"
+#include "Cinematic.h"
 #include "Box.h"
 
 class Character
@@ -10,6 +11,7 @@ public:
 	~Character();
 
 	void RefreshCamera();
+	void RefreshCinematic();
 
 	void rotateCamera(double mouseX, double mouseY);
 	void moveCameraFB(float incrs);
@@ -21,6 +23,18 @@ public:
 
 	unsigned char getLife();
 	void setLife(unsigned char life);
+	void showCameraPosition();
+	float getposY();
+	float getposX();
+	float getposZ();
+
+	void loadCinematic(string fileName);
+	void alreadyWatched();
+	bool getWatched();
+
+	void playCinematic();
+	int currentFrame = 0;
+
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;
 
@@ -41,5 +55,8 @@ private:
 	float lastX, lastY;
 	float yaw, pitch;
 	float strafe_lx, strafe_lz;
+
+	Cinematic loader;
+	bool watched = false;
 };
 

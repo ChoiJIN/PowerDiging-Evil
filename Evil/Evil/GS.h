@@ -15,6 +15,7 @@ struct GameOption {
 class GS {
 private:
 	static bool gameEnd;
+	static bool playCinematic;
 
 public:
 	static GameOption option;
@@ -31,5 +32,15 @@ public:
 	{
 		GS::debug.log("Game Over");
 		gameEnd = val;
+	}
+
+	static bool inCinematic() 
+	{
+		return playCinematic;
+	}
+
+	static void setCinematic(bool val) 
+	{
+		playCinematic = val;
 	}
 };

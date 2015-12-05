@@ -21,6 +21,23 @@ void TestScreen::update(double delta)
 {
 	Screen::update(delta);
 	objs[1].trackpos(character->getPosition());
+	
+	GS::debug.log(to_string((GS::character->getposX())));
+	if (!GS::inCinematic()) {
+		if (GS::character->getposX()>5 && !GS::character->getWatched())
+		{
+			GS::setCinematic(true);
+			GS::character->loadCinematic("cineFile_01");
+			/*if (GS::inCinematic()) {
+				cout << GS::character->getposX() << " " << GS::character->getposZ() << " ";
+				GS::character->showCameraPosition();
+			}*/
+		}
+	}
+	else {
+		GS::character->playCinematic();
+		// character pos set
+	}
 }
 
 void TestScreen::render()

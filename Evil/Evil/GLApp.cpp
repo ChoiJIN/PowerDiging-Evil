@@ -175,8 +175,8 @@ void GLApp::cursorCallback(GLFWwindow * window, double x, double y)
 		just_warped = false;
 		return;
 	}
-
 	GS::character->rotateCamera(x, y);
+	
 	//GS::debug.log(to_string(x) + ", " + to_string(y));
 
 	glfwSetCursorPos(window, 300, 300);
