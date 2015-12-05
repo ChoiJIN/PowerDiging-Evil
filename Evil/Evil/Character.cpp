@@ -94,6 +94,29 @@ void Character::rotateCamera(double mouseX, double mouseY)
 	RefreshCamera();
 }
 
+void Character::printState()
+{
+	switch (state)
+	{
+	case 0:
+		cout << "당신은 정상 상태입니다. = 0" << endl;
+		break;
+	case 1:
+		cout << "당신은 상처를 입었습니다. = 1" << endl;
+		break;
+	case 2:
+		cout << "당신은 공포에 질려 있습니다. = 2" << endl;
+		break;
+	default:
+		break;
+	}
+}
+
+void Character::setState(unsigned char s)
+{
+	state = s;
+}
+
 const Vector3& Character::getPosition() const
 {
 	return position;

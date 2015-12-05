@@ -27,15 +27,22 @@ public:
 		//cout << "Screen.h의 update(delta)" << endl;
 		// 여기에서 object들의 collision detection과 animation을 수행
 
-//		cout << "Screen update" << endl;
-//		cout << "obj size = " << objs.size() << endl;
+		//		cout << "Screen update" << endl;
+		//		cout << "obj size = " << objs.size() << endl;
 		for (size_t i = 0; i < objs.size(); i++)
 		{
-//			cout << "objs[" << i << "] 충돌 감지" << endl;
-			if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
+			//		cout << objs[i].get_box().get_cog() << endl;
+			//		cout << GS::character->get_box().get_cog() << endl;
+			if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
+				|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 			{
 				cout << "objs[" << i << "] 충돌 감지" << endl;
+				//			cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
+				//			cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
 			}
+			//		cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
+			//		cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
+
 		}
 	}
 
@@ -54,11 +61,11 @@ public:
 		glMultMatrixf(perspective.get());
 		glMultMatrixf(look.get());
 
-		glTranslatef(0, -GS::option.roomSize, 0);
 		for (size_t i = 0; i < objs.size(); i++) {
+//			glMultMatrixf(objs[i].get_matrix().get());
 			objs[i].draw();
+//			glMultMatrixf(objs[i].get_matrix().invert().get());
 		}
-		glTranslatef(0, GS::option.roomSize, 0);
 	}
 
 protected:

@@ -13,7 +13,7 @@ Object::Object(Vector3 center)
 {
 	cog = center;
 	obj_matrix.identity();
-	obj_matrix.translate(center);
+//	obj_matrix.translate(center);
 	Collision_Box = Box(cog, 2, 2, 2);
 }
 
@@ -35,13 +35,27 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
-	glTranslatef(cog.x, cog.y, cog.z);
-	loader.Draw();
-	glTranslatef(-cog.x, -cog.y, -cog.z);
+	if (!tracking)
+		loader.Draw(cog);
+	else
+	{
+		loader.Draw(cog + speed);
+	}
 }
 
 void Object::use()
 {
+}
+
+void Object::setTracking(bool t) // 트래킹 할 건지 말 건지 결정
+{
+	t = tracking;
+	speed = t*Vector3(1.0, 1.0, 1.0);
+}
+
+void Object::trackpos(Vector3 vec) // 누구를 트래킹할지 결정
+{
+	trackPosition = vec;
 }
 
 Box Object::get_box()

@@ -232,7 +232,7 @@ void CObjLoader::loadMaterialsTexture()
 	}
 }
 
-void CObjLoader::Draw(float scale)
+void CObjLoader::Draw(Vector3 center, float scale)
 {
 	if (!_loaded) {
 		loadMaterialsTexture();
@@ -279,7 +279,7 @@ void CObjLoader::Draw(float scale)
 				}
 				if (0 < v && v <= vt_size) {
 					sVertex &vt = vertexes[v - 1];
-					glVertex3f(scale*vt.x, scale*vt.y, scale*vt.z);
+					glVertex3f((scale*vt.x)+center.x, (scale*vt.y)+center.y, (scale*vt.z)+center.z);
 				}
 			}
 			glEnd();

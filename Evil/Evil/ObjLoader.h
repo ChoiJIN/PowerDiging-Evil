@@ -1,4 +1,5 @@
 #include <vector>
+#include "Matrices.h"
 
 using namespace std;
 
@@ -61,7 +62,7 @@ public:
 
 	void loadMaterialsTexture ();
 	bool Load (const char *objfile, const char *mtlfile = NULL);
-	void Draw (float scale = 1.f);
+	void Draw (Vector3 center, float scale = 1.f);
 
 private:
 	vector<sMaterial> materials;

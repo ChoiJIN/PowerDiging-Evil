@@ -151,6 +151,8 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 		case GLFW_KEY_S:
 			GS::character->moveCameraFB(-moveSpeed);
 			break;
+		case GLFW_KEY_O:
+			GS::character->printState();
 	}
 }
 
