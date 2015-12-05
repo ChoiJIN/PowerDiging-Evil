@@ -1,5 +1,6 @@
 #include "TestScreen.h"
 
+#include "ImageLoader.h"
 
 TestScreen::TestScreen()
 {
@@ -9,12 +10,6 @@ TestScreen::TestScreen()
 	objs[0].loadObj("apple");
 	objs.push_back(Object(Vector3(10, 0, 0)));
 	objs[1].loadObj("apple");
-
-//				cout << "오브젝트 박스의 무게 중심 = " << objs[0].get_box().get_cog() << endl;
-//				cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
-//				cout << "오브젝트 박스의 무게 중심 = " << objs[1].get_box().get_cog() << endl;
-//				cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
-//	obj.loadObj("apple");
 }
 
 
@@ -24,32 +19,15 @@ TestScreen::~TestScreen()
 
 void TestScreen::update(double delta)
 {
-	//cout << "Screen.h의 update(delta)" << endl;
-	// 여기에서 object들의 collision detection과 animation을 수행
-
-	//		cout << "Screen update" << endl;
-	//		cout << "obj size = " << objs.size() << endl;
-	for (size_t i = 0; i < objs.size(); i++)
-	{
-//		cout << objs[i].get_box().get_cog() << endl;
-//		cout << GS::character->get_box().get_cog() << endl;
-		if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
-			|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
-		{
-			cout << "objs[" << i << "] 충돌 감지" << endl;
-			cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-			cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
-		}
-//		cout << "오브젝트 박스의 무게 중심 = " << objs[i].get_box().get_cog() << endl;
-//		cout << "캐릭터 박스의 무게 중심 = " << GS::character->get_box().get_cog() << endl;
-
-	}
+	Screen::update(delta);
 }
 
 void TestScreen::render()
 {
+	Screen::render();
 	//cout << "Screen.h의 render()" << endl;s
 	//cout << "여기에 모든 Screen에서 적용할 model, view 행렬을 호출하면 된다." << endl;
+	Screen::render();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -66,13 +44,13 @@ void TestScreen::render()
 		objs[i].draw();
 		glMultMatrixf(objs[i].get_matrix().invert().get());
 	}
-
-	int t[6] = {};
+	GLuint t[6] = { 
+		ImageLoader::getTextureId("back_wall.png"),
+		ImageLoader::getTextureId("side_wall.png"),
+		ImageLoader::getTextureId("front_wall.png"),
+		ImageLoader::getTextureId("side_wall.png"),
+		ImageLoader::getTextureId("bottom_wall.png"),
+		ImageLoader::getTextureId("top_wall.png")
+	};
 	GLDraw::room(GS::option.roomSize, t);
-	//GLDraw::drawPlane(Vector3(-0.2, 0.2, 0), Vector3(0.2, 0.2, 0), Vector3(0.2, -0.2, 0), Vector3(-0.2, -0.2, 0));
-
-	/*GLCube cube;
-	cube.draw();*/
-
-	//cout << GS::character->getLook() << endl;
 }

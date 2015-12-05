@@ -1,6 +1,5 @@
 #include "GLApp.h"
 
-
 GLApp* GLApp::instance = NULL;
 
 GLApp::GLApp()
@@ -74,6 +73,7 @@ void GLApp::glSetting()
 {
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
+	glEnable(GL_TEXTURE_2D);
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 }
 
@@ -139,18 +139,18 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	float moveSpeed = 0.4f;
 	// move
 	switch (key) {
-		case GLFW_KEY_A:
-			GS::character->moveCameraRL(moveSpeed);
-			break;
-		case GLFW_KEY_D:
-			GS::character->moveCameraRL(-moveSpeed);
-			break;
-		case GLFW_KEY_W:
-			GS::character->moveCameraFB(moveSpeed);
-			break;
-		case GLFW_KEY_S:
-			GS::character->moveCameraFB(-moveSpeed);
-			break;
+	case GLFW_KEY_A:
+		GS::character->moveCameraRL(moveSpeed);
+		break;
+	case GLFW_KEY_D:
+		GS::character->moveCameraRL(-moveSpeed);
+		break;
+	case GLFW_KEY_W:
+		GS::character->moveCameraFB(moveSpeed);
+		break;
+	case GLFW_KEY_S:
+		GS::character->moveCameraFB(-moveSpeed);
+		break;
 	}
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <map>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -29,6 +31,10 @@ public:
 	/* Screen */
 	void pushScreen(Screen* screen);
 	void popScreen();
+	
+	/* Texture */
+	void loadTexture(string filename);
+	GLuint getTextureId(string filename);
 
 	/* GLFW Callbacks */
 	static void errorCallback(int error, const char* description);
@@ -41,7 +47,5 @@ private:
 	static GLApp* instance;
 	GLFWwindow* window;
 	stack<Screen*> screenStk;
-	
-
 };
 

@@ -13,7 +13,6 @@ Object::Object(Vector3 center)
 {
 	cog = center;
 	obj_matrix.identity();
-	obj_matrix.translate(center);
 	Collision_Box = Box(cog, 2, 2, 2);
 }
 

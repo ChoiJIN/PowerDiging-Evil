@@ -1,5 +1,6 @@
 #pragma once
 #include <stack>
+#include <vector>
 #include "Debug.h"
 #include "Character.h"
 

@@ -61,6 +61,11 @@ public:
 		glTranslatef(0, GS::option.roomSize, 0);
 	}
 
+	GLuint getTextureId(string name)
+	{
+
+	}
+
 protected:
 	std::vector<Object> objs;
 

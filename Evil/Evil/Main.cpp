@@ -5,12 +5,15 @@
 // Standard Library
 #include <iostream>
 #include <fstream>
+#include <map>
 
 // Game Library
 #include "GLApp.h"
 #include "GS.h"
+#include "ImageLoader.h"
 
 #include "TestScreen.h"
+using namespace std;
 
 int main(void)
 {
@@ -27,6 +30,13 @@ int main(void)
 
 	TestScreen tes;
 	GLApp::getInstance()->pushScreen(&tes);
+	//GLApp::getInstance()->loadTexture("test.png");
+	ImageLoader::loadTexture("test.png");
+	ImageLoader::loadTexture("front_wall.png");
+	ImageLoader::loadTexture("back_wall.png");
+	ImageLoader::loadTexture("side_wall.png");
+	ImageLoader::loadTexture("top_wall.png");
+	ImageLoader::loadTexture("bottom_wall.png");
 
 	glMatrixMode(GL_MODELVIEW);
 
