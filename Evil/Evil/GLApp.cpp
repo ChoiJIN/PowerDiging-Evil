@@ -136,20 +136,23 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
-	float moveSpeed = 0.4f;
 	// move
 	switch (key) {
 	case GLFW_KEY_A:
-		GS::character->moveCameraRL(moveSpeed);
+		if (action == GLFW_PRESS) GS::character->setLeftMove(true);
+		else if (action == GLFW_RELEASE) GS::character->setLeftMove(false);
 		break;
 	case GLFW_KEY_D:
-		GS::character->moveCameraRL(-moveSpeed);
+		if (action == GLFW_PRESS) GS::character->setRightMove(true);
+		else if (action == GLFW_RELEASE) GS::character->setRightMove(false);
 		break;
 	case GLFW_KEY_W:
-		GS::character->moveCameraFB(moveSpeed);
+		if (action == GLFW_PRESS) GS::character->setFrontMove(true);
+		else if (action == GLFW_RELEASE) GS::character->setFrontMove(false);
 		break;
 	case GLFW_KEY_S:
-		GS::character->moveCameraFB(-moveSpeed);
+		if (action == GLFW_PRESS) GS::character->setBackMove(true);
+		else if (action == GLFW_RELEASE) GS::character->setBackMove(false);
 		break;
 	}
 }
