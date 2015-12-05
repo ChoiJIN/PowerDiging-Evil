@@ -1,10 +1,11 @@
 #include <iostream>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <string>
 #include <map>
 #include <sstream>
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include "GS.h"
 
 #include <opencv2/highgui/highgui.hpp>\
 
@@ -34,6 +35,10 @@ private:
 	static unsigned char* loadImage(string file)
 	{
 		Mat img = imread(file);
+		if (img.empty()) {
+			GS::debug.log(file + "이 존재하지 않습니다.");
+			exit(1);
+		}
 		string filename = *(split(file, '/').end() - 1);	 // name with ext
 		imgMap.insert(pair<string, Mat>(filename, img));
 

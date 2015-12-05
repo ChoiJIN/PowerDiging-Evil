@@ -27,8 +27,9 @@ public:
 		return gameEnd;
 	}
 
-	static void setGameEnd(bool val)
+	static void setGameEnd(bool val) // 게임 오버
 	{
+		GS::debug.log("Game Over");
 		gameEnd = val;
 	}
 };

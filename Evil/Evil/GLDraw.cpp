@@ -51,12 +51,12 @@ void GLDraw::room(float size, GLuint textureId[6])
 {
 	Vector3 pts[8];
 	pts[0] = Vector3(0, 0, 0) - Vector3(size, size, size);
-	pts[1] = pts[0] + Vector3(0, 2 * size, 0);
-	pts[2] = pts[0] + Vector3(2 * size, 2 * size, 0);
+	pts[1] = pts[0] + Vector3(0, size, 0);
+	pts[2] = pts[0] + Vector3(2 * size, size, 0);
 	pts[3] = pts[0] + Vector3(2 * size, 0, 0);
 	pts[4] = pts[0] + Vector3(2 * size, 0, 2 * size);
-	pts[5] = pts[0] + Vector3(2 * size, 2*size, 2 * size);
-	pts[6] = pts[0] + Vector3(0, 2 * size, 2 * size);
+	pts[5] = pts[0] + Vector3(2 * size, size, 2 * size);
+	pts[6] = pts[0] + Vector3(0, size, 2 * size);
 	pts[7] = pts[0] + Vector3(0, 0, 2 * size);
 
 	// side

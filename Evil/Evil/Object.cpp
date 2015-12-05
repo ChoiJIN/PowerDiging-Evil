@@ -34,11 +34,36 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
-	loader.Draw(cog);
+	speed = 0.005f*tracking*(trackPosition - cog);
+	if (!tracking)
+	{
+		loader.Draw(cog);
+	}
+	else
+	{
+		cog += speed;
+		Collision_Box.move_box(speed);
+		loader.Draw(cog);
+	}
 }
 
 void Object::use()
 {
+}
+
+void Object::setTracking(bool t) // 트래킹 할 건지 말 건지 결정
+{
+	tracking = t;
+}
+
+bool Object::getTracking()
+{
+	return tracking;
+}
+
+void Object::trackpos(Vector3 vec) // 누구를 트래킹할지 결정
+{
+	trackPosition = vec;
 }
 
 Box Object::get_box()
