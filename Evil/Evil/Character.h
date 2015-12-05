@@ -19,7 +19,8 @@ public:
 	Box get_box();
 	bool collision_check(Box B, Vector3 delta);
 
-
+	unsigned char getLife();
+	void setLife(unsigned char life);
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;
 

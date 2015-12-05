@@ -117,6 +117,16 @@ void Character::setState(unsigned char s)
 	state = s;
 }
 
+unsigned char Character::getLife()
+{
+	return Life;
+}
+
+void Character::setLife(unsigned char life)
+{
+	Life = life;
+}
+
 const Vector3& Character::getPosition() const
 {
 	return position;

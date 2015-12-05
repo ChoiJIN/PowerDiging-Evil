@@ -35,6 +35,7 @@ public:
 	void use();
 
 	void setTracking(bool t);
+	bool getTracking();
 
 	void trackpos(Vector3 vec);
 
