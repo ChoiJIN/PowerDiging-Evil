@@ -78,6 +78,7 @@ public:
 protected:
 	Character* character;
 	std::vector<Object> objs;
+	Box roomBox;
 
 private:
 	time_t currentTime;

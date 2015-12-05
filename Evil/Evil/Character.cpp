@@ -11,7 +11,7 @@ Character::Character()
 	float initialY = GS::option.characterHeight - GS::option.roomSize;
 	position = Vector3(0, initialY, 0);
 	look = Vector3(0, initialY, 1);
-	Collision_Box = Box(position, 4, 4, 4);
+	Collision_Box = Box(position, 1, 1, 1);
 	yaw = 0.0;
 	pitch = 0.0;
 }
@@ -33,10 +33,10 @@ void Character::RefreshCamera() {
 }
 
 void Character::moveCameraFB(float incrs) {
-
 	float lx = cos(yaw) * cos(pitch);
 	float ly = sin(pitch);
 	float lz = sin(yaw) * cos(pitch);
+	Cdelta = Vector3(incrs*lx, 0, incrs*lz);
 
 	position.x = position.x + incrs*lx;
 	//posY = posY + incrs*ly;
@@ -46,7 +46,7 @@ void Character::moveCameraFB(float incrs) {
 	RefreshCamera();
 }
 void Character::moveCameraRL(float incrs) {
-
+	Cdelta = Vector3(incrs*strafe_lx, 0, incrs*strafe_lz);
 	position.x = position.x + incrs*strafe_lx;
 	position.z = position.z + incrs*strafe_lz;
 	Collision_Box.move_box(Vector3(incrs*strafe_lx, 0, incrs*strafe_lz));

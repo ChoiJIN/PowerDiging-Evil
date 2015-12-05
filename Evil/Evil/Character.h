@@ -27,9 +27,10 @@ public:
 private:
 	Vector3 position;
 	Vector3 look;
+	Vector3 Cdelta = Vector3(0.f, 0.f, 0.f); // 키 한번에 움직인 거리
 	Box Collision_Box;
 	bool front_move, back_move, left_move, right_move = true;
-	unsigned char state = 0, Life = 5;
+	unsigned char state = 0, Life = 50;
 	float lastX, lastY;
 	float yaw, pitch;
 	float strafe_lx, strafe_lz;

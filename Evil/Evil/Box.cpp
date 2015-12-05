@@ -83,11 +83,72 @@ float Box::ZLength()
 	return (p4 - p0).length();
 }
 
-bool Box::collision_detection_2D(const Box B)
+bool Box::collision_detection_in(Box iBox, Vector3 delta) // iBox가 움직였을 때 iBox가 여전히 Box의 안에 있는 지 검출
 {
 	//현재 박스에서 다음 박스에 대한 충돌 체크
 	// 2D : 4개의 점(x, y)이 ax + by + c = 양수인지, 음수인지 4개의 직선 체크로 결정
 	// 3D : 8개의 점(x, y, z)이 ax + by + cz + d = 양수인지, 음수인지 6개의 평면 체크로 결정
+
+	Box B = Box(iBox.get_cog() + delta, iBox.XLength(), iBox.YLength(), iBox.ZLength());
+
+	if ((B.p0 - p0).dot(n0123()) >= 0 &&
+		(B.p0 - p4).dot(n4567()) >= 0 &&
+		(B.p0 - p0).dot(n0154()) >= 0 &&
+		(B.p0 - p2).dot(n2376()) >= 0 &&
+		(B.p0 - p1).dot(n1265()) >= 0 &&
+		(B.p0 - p3).dot(n3047()) >= 0)
+		if ((B.p1 - p0).dot(n0123()) >= 0 &&
+			(B.p1 - p4).dot(n4567()) >= 0 &&
+			(B.p1 - p0).dot(n0154()) >= 0 &&
+			(B.p1 - p2).dot(n2376()) >= 0 &&
+			(B.p1 - p1).dot(n1265()) >= 0 &&
+			(B.p1 - p3).dot(n3047()) >= 0)
+			if ((B.p2 - p0).dot(n0123()) >= 0 &&
+				(B.p2 - p4).dot(n4567()) >= 0 &&
+				(B.p2 - p0).dot(n0154()) >= 0 &&
+				(B.p2 - p2).dot(n2376()) >= 0 &&
+				(B.p2 - p1).dot(n1265()) >= 0 &&
+				(B.p2 - p3).dot(n3047()) >= 0)
+				if ((B.p3 - p0).dot(n0123()) >= 0 &&
+					(B.p3 - p4).dot(n4567()) >= 0 &&
+					(B.p3 - p0).dot(n0154()) >= 0 &&
+					(B.p3 - p2).dot(n2376()) >= 0 &&
+					(B.p3 - p1).dot(n1265()) >= 0 &&
+					(B.p3 - p3).dot(n3047()) >= 0)
+					if ((B.p4 - p0).dot(n0123()) >= 0 &&
+						(B.p4 - p4).dot(n4567()) >= 0 &&
+						(B.p4 - p0).dot(n0154()) >= 0 &&
+						(B.p4 - p2).dot(n2376()) >= 0 &&
+						(B.p4 - p1).dot(n1265()) >= 0 &&
+						(B.p4 - p3).dot(n3047()) >= 0)
+						if ((B.p5 - p0).dot(n0123()) >= 0 &&
+							(B.p5 - p4).dot(n4567()) >= 0 &&
+							(B.p5 - p0).dot(n0154()) >= 0 &&
+							(B.p5 - p2).dot(n2376()) >= 0 &&
+							(B.p5 - p1).dot(n1265()) >= 0 &&
+							(B.p5 - p3).dot(n3047()) >= 0)
+							if ((B.p6 - p0).dot(n0123()) >= 0 &&
+								(B.p6 - p4).dot(n4567()) >= 0 &&
+								(B.p6 - p0).dot(n0154()) >= 0 &&
+								(B.p6 - p2).dot(n2376()) >= 0 &&
+								(B.p6 - p1).dot(n1265()) >= 0 &&
+								(B.p6 - p3).dot(n3047()) >= 0)
+								if ((B.p7 - p0).dot(n0123()) >= 0 &&
+									(B.p7 - p4).dot(n4567()) >= 0 &&
+									(B.p7 - p0).dot(n0154()) >= 0 &&
+									(B.p7 - p2).dot(n2376()) >= 0 &&
+									(B.p7 - p1).dot(n1265()) >= 0 &&
+									(B.p7 - p3).dot(n3047()) >= 0)
+									return true;
+
+	// 충돌 테스트
+	/*		cout << (B.p2 - p0).dot(n0123()) << endl;
+	cout << (B.p2 - p4).dot(n4567()) << endl;
+	cout << (B.p2 - p0).dot(n0154()) << endl;
+	cout << (B.p2 - p2).dot(n2376()) << endl;
+	cout << (B.p2 - p1).dot(n1265()) << endl;
+	cout << (B.p2 - p3).dot(n3047()) << endl;
+	*/
 
 	return false;
 }
@@ -108,14 +169,6 @@ bool Box::collision_detection_3D(Box iBox, Vector3 delta) // iBox의 각 꼭지점이 
 		(B.p0 - p3).dot(n3047()) >= 0)
 		return true;
 
-	// 충돌 테스트
-	/*		cout << (B.p2 - p0).dot(n0123()) << endl;
-	cout << (B.p2 - p4).dot(n4567()) << endl;
-	cout << (B.p2 - p0).dot(n0154()) << endl;
-	cout << (B.p2 - p2).dot(n2376()) << endl;
-	cout << (B.p2 - p1).dot(n1265()) << endl;
-	cout << (B.p2 - p3).dot(n3047()) << endl;
-	*/
 	if ((B.p1 - p0).dot(n0123()) >= 0 &&
 		(B.p1 - p4).dot(n4567()) >= 0 &&
 		(B.p1 - p0).dot(n0154()) >= 0 &&
