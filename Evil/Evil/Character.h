@@ -14,6 +14,8 @@ public:
 	void rotateCamera(double mouseX, double mouseY);
 	void moveCameraFB(float incrs);
 	void moveCameraRL(float incrs);
+	void printState();
+	void setState(unsigned char s);
 	Box get_box();
 	bool collision_check(Box B, Vector3 delta);
 
@@ -26,6 +28,7 @@ private:
 	Vector3 look;
 	Box Collision_Box;
 	bool front_move, back_move, left_move, right_move = true;
+	unsigned char state = 0, Life = 5;
 	float lastX, lastY;
 	float posX, posY, posZ;
 	float lookX, lookY, lookZ;
