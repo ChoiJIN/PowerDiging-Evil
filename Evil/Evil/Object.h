@@ -13,6 +13,7 @@ private:
 	string id;
 	GLuint texture = 0;
 	bool passable = true;
+	bool collision = false;
 	Vector3 cog;
 	Vector3 trackPosition;
 	Vector3 speed = Vector3(0.f, 0.f, 0.f);
@@ -39,11 +40,17 @@ public:
 
 	void use();
 
+	void setCollision(bool b);
+	bool getCollision();
+
 	void setTracking(bool t);
 	bool getTracking();
 
 	void trackpos(Vector3 vec);
 	Vector3 get_trackposition();
+
+	void set_speed(Vector3 v);
+	Vector3 get_speed();
 
 	Box get_box();
 	void setBoxSize(int X, int Y, int Z);
