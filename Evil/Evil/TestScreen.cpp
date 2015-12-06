@@ -8,6 +8,7 @@ TestScreen::TestScreen()
 	objs.push_back(Object(Vector3(5, -18, 0)));
 	objs[0].loadObj("apple");
 	objs[0].set_passable(false);
+
 	objs.push_back(Object(Vector3(10, -18, 0)));
 	objs[1].loadObj("apple");
 	objs[1].set_passable(false);
