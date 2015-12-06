@@ -35,16 +35,28 @@ bool Character::getWatched() {
 
 void Character::playCinematic() {
 	if (loader.returnVectorSize() > currentFrame) {
-		loader.returnVertexes(currentFrame);
-		position.x = loader.getposX();
-		position.z = loader.getposZ();
-		yaw = loader.getYaw();
-		pitch = loader.getPitch();
-		currentFrame++;
+		//if (skipFrame == true) {
+			loader.returnVertexes(currentFrame);
+			position.x = loader.getposX();
+			position.z = loader.getposZ();
+			look.x = loader.getlookx();
+			look.y = loader.getlooky();
+			look.z = loader.getlookz();
+			//skipFrame = false;
+			currentFrame++;
+		/*}
+		else {
+			skipFrame = true;
+		}*/
+
 	}
 }
 
 void Character::RefreshCamera() {
+	/*if (position.x>5)
+	{
+		cout << position.x << " " << position.z << " " << yaw << " " << pitch << endl;
+	}*/
 	if (front_move)
 		moveCameraFB(GS::moveSpeed);
 	if (back_move)
@@ -65,7 +77,7 @@ void Character::RefreshCamera() {
 }
 
 void Character::showCameraPosition() {
-	cout << yaw << " " << pitch << " " << endl;
+	cout << look.x << " " << look.y << " " << look.z << endl;
 }
 float Character::getposX() {
 	return position.x;

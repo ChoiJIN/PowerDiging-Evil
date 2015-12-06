@@ -27,8 +27,17 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		character->RefreshCamera();
+		if (!GS::inCinematic()) {
+			character->RefreshCamera();
+			/*if (GS::character->getposX() > 5) {
+				cout << GS::character->getposX() << " " << GS::character->getposZ() << " ";
+				GS::character->showCameraPosition();
+			}*/
+		}
+		else {
+			character->playCinematic();
 
+		}
 		currentTime = time(NULL);
 
 		if (GS::character->getLife() == 0)

@@ -22,7 +22,8 @@ void TestScreen::update(double delta)
 	Screen::update(delta);
 	objs[1].trackpos(character->getPosition());
 	
-	GS::debug.log(to_string((GS::character->getposX())));
+	//GS::debug.log(to_string((GS::character->getposX())));
+
 	if (!GS::inCinematic()) {
 		if (GS::character->getposX()>5 && !GS::character->getWatched())
 		{
@@ -34,10 +35,10 @@ void TestScreen::update(double delta)
 			}*/
 		}
 	}
-	else {
-		GS::character->playCinematic();
-		// character pos set
-	}
+	//else {
+	//	GS::character->playCinematic();
+	//	// character pos set
+	//}
 }
 
 void TestScreen::render()

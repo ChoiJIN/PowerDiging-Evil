@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
+#include <fstream>
+
 using namespace std;
 struct cineCoordinate
 {
-	float x, z, yaw, pitch;
+	float x, z, lookx, looky,lookz;
 };
 
 
@@ -20,15 +22,18 @@ public:
 
 	float getposX();
 	float getposZ();
-	float getYaw();
-	float getPitch();
+	float getlookx();
+	float getlooky();
+	float getlookz();
 	
 
 private:
 	float posX;
 	float posZ;
-	float yaw;
-	float pitch;
+	float lookx;
+	float looky;
+	float lookz;
+	
 	
 	vector<cineCoordinate> vertexes;
 

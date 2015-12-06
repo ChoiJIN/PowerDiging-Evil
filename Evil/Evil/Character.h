@@ -11,7 +11,7 @@ public:
 	~Character();
 
 	void RefreshCamera();
-	void RefreshCinematic();
+	
 
 	void rotateCamera(double mouseX, double mouseY);
 	void moveCameraFB(float incrs);
@@ -34,6 +34,7 @@ public:
 
 	void playCinematic();
 	int currentFrame = 0;
+	bool skipFrame = true;
 
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;
@@ -51,7 +52,7 @@ private:
 	bool back_move = false;
 	bool left_move = false;
 	bool right_move = false;
-	unsigned char state = 0, Life = 5;
+	unsigned char state = 0, Life = 500;
 	float lastX, lastY;
 	float yaw, pitch;
 	float strafe_lx, strafe_lz;

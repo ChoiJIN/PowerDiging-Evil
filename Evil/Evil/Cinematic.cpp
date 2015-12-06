@@ -8,20 +8,16 @@ Cinematic::Cinematic(){
 Cinematic::~Cinematic(){}
 
 bool Cinematic::readFile(const char* fileName) {
-	FILE *fp = fopen(fileName, "r");
-	if (!fp) return false;
+	ifstream in(fileName);
 
-	char buffer[1024];
-	while (fscanf(fp, "%s", buffer) != EOF) {
-		bool go_eol = true;
-
+	while(!in.eof())
+	{
 		cineCoordinate v;
-		fscanf(fp, "%f %f %f %f", &v.x, &v.z, &v.yaw, &v.pitch);
+		in >> v.x >> v.z >> v.lookx >> v.looky >> v.lookz;
 		vertexes.push_back(v);
-
-		if (go_eol) fgets(buffer, 1024, fp);
 	}
-	fclose(fp);
+	in.close();
+
 	return true;
 }
 
@@ -38,8 +34,10 @@ bool Cinematic::Load(const char *cineFile)
 void Cinematic::returnVertexes(int i) {
 	posX = vertexes.at(i).x;
 	posZ = vertexes.at(i).z;
-	yaw = vertexes.at(i).yaw;
-	pitch = vertexes.at(i).pitch;
+	lookx = vertexes.at(i).lookx;
+	looky = vertexes.at(i).looky;
+	lookz = vertexes.at(i).lookz;
+	
 	
 	
 }
@@ -55,11 +53,15 @@ float Cinematic::getposX() {
 float Cinematic::getposZ() {
 	return posZ;
 }
-float Cinematic::getYaw()
+float Cinematic::getlookx()
 {
-	return yaw;
+	return lookx;
 }
-float Cinematic::getPitch()
+float Cinematic::getlooky()
 {
-	return pitch;
+	return looky;
+}
+float Cinematic::getlookz()
+{
+	return lookz;
 }
