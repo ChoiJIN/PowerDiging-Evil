@@ -169,10 +169,6 @@ void GLApp::buttonCallback(GLFWwindow * window, int button, int action, int mode
 
 void GLApp::cursorCallback(GLFWwindow * window, double x, double y)
 {
-	/*if (GS::character->getposX() > 5) {
-		cout << GS::character->getposX() << " " << GS::character->getposZ() << " ";
-		GS::character->showCameraPosition();
-	}*/
 	static bool just_warped = false;
 
 	if (just_warped) {

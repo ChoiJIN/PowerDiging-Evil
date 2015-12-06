@@ -53,12 +53,12 @@ void TestScreen::update(double delta)
 	else
 		character->setRightCollision(false);
 
-	if (!GS::inCinematic()) {
-		if (character->getposX()>5 && !character->getWatched())
+	if (!GS::inCinematic() && !character->getWatched()) {
+		if (character->getposX()>5)
 		{
 			GS::setCinematic(true);
 			character->loadCinematic("cineFile_01");
-			character->alreadyWatched();
+			
 		}
 	}
 }

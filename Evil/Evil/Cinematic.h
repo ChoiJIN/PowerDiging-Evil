@@ -19,7 +19,6 @@ public:
 	void returnVertexes(int i);
 	int returnVectorSize();
 
-
 	float getposX();
 	float getposZ();
 	float getlookx();

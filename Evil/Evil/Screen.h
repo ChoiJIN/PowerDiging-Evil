@@ -5,6 +5,7 @@
 #include <vector>
 #include <ctime>
 
+#include "Cinematic.h"
 #include "Character.h"
 #include "Object.h"
 #include "Matrices.h"
@@ -27,12 +28,17 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		if (!GS::inCinematic()) {
-			character->RefreshCamera();
-		}
-		else {
+		 if(GS::inCinematic()){
 			character->playCinematic();
-		}
+			if (character->currentFrame > character->maxFrame-1) {
+				character->alreadyWatched(); // 마지막프레임까지 가면 이미본걸로 체크
+				GS::setCinematic(false); // 다시 시네마틱을 보지 않는 상황으로 전환.
+				character->currentFrame = 0; 
+			}
+		 }
+		 else {
+			 character->RefreshCamera();
+		 }
 		currentTime = time(NULL);
 
 		if (GS::character->getLife() == 0)

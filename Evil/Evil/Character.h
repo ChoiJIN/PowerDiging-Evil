@@ -32,9 +32,12 @@ public:
 	void alreadyWatched();
 	bool getWatched();
 
+
+
 	void playCinematic();
 	int currentFrame = 0;
-	bool skipFrame = true;
+	int maxFrame = 0;
+	
 
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;

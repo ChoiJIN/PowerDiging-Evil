@@ -8,9 +8,6 @@
 #include <map>
 
 // assimp include files. These three are usually needed.
-#include <assimp/cimport.h>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 // Game Library
 #include "GLApp.h"

@@ -23,10 +23,12 @@ Character::~Character()
 void Character::loadCinematic(string fileName) {
 	string cineName = fileName + ".txt";
 	loader.Load(cineName.c_str());
+	maxFrame = loader.returnVectorSize();
 }
 
 void Character::alreadyWatched() {
 	watched = true;
+	GS::setCinematic(false);
 }
 
 bool Character::getWatched() {
@@ -34,7 +36,7 @@ bool Character::getWatched() {
 }
 
 void Character::playCinematic() {
-	if (loader.returnVectorSize() > currentFrame) {
+	if (maxFrame > currentFrame) {
 		//if (skipFrame == true) {
 		loader.returnVertexes(currentFrame);
 		position.x = loader.getposX();
