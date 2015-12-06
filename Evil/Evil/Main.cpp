@@ -41,8 +41,14 @@ int main(void)
 
 	glMatrixMode(GL_MODELVIEW);
 
+	
+	//freopen("cineFile_01.txt", "w", stdout);
+
+
+
 	app.mainLoop();
 
+	
 	//while (!glfwWindowShouldClose(window))
 	//{
 	//	float ratio;

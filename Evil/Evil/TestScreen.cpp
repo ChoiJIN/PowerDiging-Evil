@@ -25,18 +25,7 @@ void TestScreen::update(double delta)
 	Screen::update(delta);
 	if((objs[1].get_trackposition() - objs[1].get_box().get_cog()).length() < 1)
 		objs[1].trackpos(character->getPosition());
-//	if (!roomBox.collision_detection_in(character->get_box(), Vector3(0.f, 0.f, 0.f)))
-//	{
-//		if(character->get_front_move() == true)  // 0번 FRONT, 1번 BACK, 2번 LEFT, 3번 RIGHT
-//			character->moveFunction(-character->getCdelta(0).x, character->getCdelta(0).y, false);
-//		if (character->get_back_move() == true)
-//			character->moveFunction(-character->getCdelta(1).x, character->getCdelta(1).y, false);
-//		if (character->get_left_move() == true)
-//			character->moveFunction(-character->getCdelta(2).x, character->getCdelta(2).y, false);
-//		if (character->get_right_move() == true)
-//			character->moveFunction(-character->getCdelta(3).x, character->getCdelta(3).y, false);
-		//		cout << "방 밖으로 나감" << endl;
-//	}
+
 	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
 	{
 		character->setFrontCollision(true);
@@ -64,6 +53,14 @@ void TestScreen::update(double delta)
 	}
 	else
 		character->setRightCollision(false);
+
+	if (!GS::inCinematic()) {
+		if (GS::character->getposX()>5 && !GS::character->getWatched())
+		{
+			GS::setCinematic(true);
+			GS::character->loadCinematic("cineFile_01");
+		}
+	}
 }
 
 void TestScreen::render()

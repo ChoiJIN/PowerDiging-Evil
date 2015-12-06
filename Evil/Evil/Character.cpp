@@ -20,8 +20,40 @@ Character::~Character()
 {
 }
 
+void Character::loadCinematic(string fileName) {
+	string cineName = fileName + ".txt";
+	loader.Load(cineName.c_str());
+}
+
+void Character::alreadyWatched() {
+	watched = true;
+}
+
+bool Character::getWatched() {
+	return watched;
+}
+
+void Character::playCinematic() {
+	if (loader.returnVectorSize() > currentFrame) {
+		//if (skipFrame == true) {
+		loader.returnVertexes(currentFrame);
+		position.x = loader.getposX();
+		position.z = loader.getposZ();
+		look.x = loader.getlookx();
+		look.y = loader.getlooky();
+		look.z = loader.getlookz();
+		//skipFrame = false;
+		currentFrame++;
+		/*}
+		else {
+			skipFrame = true;
+		}*/
+
+	}
+}
+
 void Character::RefreshCamera() { // moveFunction(float incrs, int type) type = 0 : FB, type = 1 : RL
-// 0번 UP, 1번 DOWN, 2번 LEFT, 3번 RIGHT
+								  // 0번 UP, 1번 DOWN, 2번 LEFT, 3번 RIGHT
 
 	if (front_move && !front_collision)
 		moveCameraFB(GS::moveSpeed);
@@ -45,6 +77,19 @@ void Character::RefreshCamera() { // moveFunction(float incrs, int type) type = 
 	Cdelta[3] = Vector3(-GS::moveSpeed*strafe_lx, 0, -GS::moveSpeed*strafe_lz);
 
 	look = Vector3(position.x + look.x, position.y + look.y, position.z + look.z);
+}
+
+void Character::showCameraPosition() {
+	cout << look.x << " " << look.y << " " << look.z << endl;
+}
+float Character::getposX() {
+	return position.x;
+}
+float Character::getposY() {
+	return position.y;
+}
+float Character::getposZ() {
+	return position.z;
 }
 
 void Character::moveCameraFB(float incrs) {
@@ -153,7 +198,6 @@ void Character::setFrontMove(bool b)
 void Character::setBackMove(bool b)
 {
 	back_move = b;
-
 }
 
 void Character::setLeftMove(bool b)

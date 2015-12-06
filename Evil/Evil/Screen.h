@@ -27,8 +27,13 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		character->RefreshCamera();
+		if (!GS::inCinematic()) {
+			character->RefreshCamera();
+		}
+		else {
+			character->playCinematic();
 
+		}
 		currentTime = time(NULL);
 
 		if (GS::character->getLife() == 0)
