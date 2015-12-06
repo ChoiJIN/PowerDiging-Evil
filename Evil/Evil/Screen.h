@@ -32,7 +32,6 @@ public:
 		}
 		else {
 			character->playCinematic();
-
 		}
 		currentTime = time(NULL);
 

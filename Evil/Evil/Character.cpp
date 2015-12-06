@@ -50,6 +50,10 @@ void Character::playCinematic() {
 		}*/
 
 	}
+	else {
+		GS::setCinematic(false);
+
+	}
 }
 
 void Character::RefreshCamera() { // moveFunction(float incrs, int type) type = 0 : FB, type = 1 : RL

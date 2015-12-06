@@ -6,4 +6,4 @@ bool GS::gameEnd = false;
 Character* GS::character;
 float GS::moveSpeed = 0.1f;
 GameOption GS::option;
-bool GS::playCinematic = false;
+bool GS::isCinematicPlaying = false;

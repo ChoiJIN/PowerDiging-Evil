@@ -12,7 +12,6 @@ TestScreen::TestScreen()
 	objs[1].setTracking(true);
 	objs[1].trackpos(character->getPosition());
 	roomBox = Box(Vector3(0.f, 0.f, 0.f), (GS::option.roomSize*2), (GS::option.roomSize*2) + 4, (GS::option.roomSize*2));
-	
 }
 
 
@@ -55,10 +54,11 @@ void TestScreen::update(double delta)
 		character->setRightCollision(false);
 
 	if (!GS::inCinematic()) {
-		if (GS::character->getposX()>5 && !GS::character->getWatched())
+		if (character->getposX()>5 && !character->getWatched())
 		{
 			GS::setCinematic(true);
-			GS::character->loadCinematic("cineFile_01");
+			character->loadCinematic("cineFile_01");
+			character->alreadyWatched();
 		}
 	}
 }

@@ -15,7 +15,7 @@ struct GameOption {
 class GS {
 private:
 	static bool gameEnd;
-	static bool playCinematic;
+	static bool isCinematicPlaying;
 
 public:
 	static GameOption option;
@@ -34,13 +34,14 @@ public:
 		gameEnd = val;
 	}
 
+	// Cinematic을 실행할 조건이냐
 	static bool inCinematic() 
 	{
-		return playCinematic;
+		return !character->getWatched() && isCinematicPlaying;
 	}
 
 	static void setCinematic(bool val) 
 	{
-		playCinematic = val;
+		isCinematicPlaying = val;
 	}
 };
