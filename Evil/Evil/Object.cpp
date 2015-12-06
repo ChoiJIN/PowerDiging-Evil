@@ -34,7 +34,6 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
-	speed = 0.005f*tracking*(trackPosition - cog);
 	if (!tracking)
 	{
 		loader.Draw(cog);
@@ -64,6 +63,12 @@ bool Object::getTracking()
 void Object::trackpos(Vector3 vec) // 누구를 트래킹할지 결정
 {
 	trackPosition = vec;
+	speed = 0.02f*tracking*(trackPosition - cog);
+}
+
+Vector3 Object::get_trackposition()
+{
+	return trackPosition;
 }
 
 Box Object::get_box()

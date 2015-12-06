@@ -11,7 +11,7 @@ Character::Character()
 	float initialY = GS::option.characterHeight - GS::option.roomSize;
 	position = Vector3(0, initialY, 0);
 	look = Vector3(0, initialY, 1);
-	Collision_Box = Box(position, 4, 4, 4);
+	Collision_Box = Box(position, 1, 1, 1);
 	yaw = 0.0;
 	pitch = 0.0;
 }
@@ -20,14 +20,16 @@ Character::~Character()
 {
 }
 
-void Character::RefreshCamera() {
-	if (front_move)
+void Character::RefreshCamera() { // moveFunction(float incrs, int type) type = 0 : FB, type = 1 : RL
+// 0번 UP, 1번 DOWN, 2번 LEFT, 3번 RIGHT
+
+	if (front_move && !front_collision)
 		moveCameraFB(GS::moveSpeed);
-	if (back_move)
+	if (back_move && !back_collision)
 		moveCameraFB(-GS::moveSpeed);
-	if (left_move)
+	if (left_move && !left_collision)
 		moveCameraRL(GS::moveSpeed);
-	if (right_move)
+	if (right_move && !right_collision)
 		moveCameraRL(-GS::moveSpeed);
 
 	look.x = cos(yaw) * cos(pitch);
@@ -37,11 +39,15 @@ void Character::RefreshCamera() {
 	strafe_lx = cos(yaw - (float)M_PI_2);
 	strafe_lz = sin(yaw - (float)M_PI_2);
 
+	Cdelta[0] = Vector3(GS::moveSpeed*cos(yaw) * cos(pitch), 0, GS::moveSpeed*sin(yaw) * cos(pitch));
+	Cdelta[1] = Vector3(-GS::moveSpeed*cos(yaw) * cos(pitch), 0, -GS::moveSpeed*sin(yaw) * cos(pitch));
+	Cdelta[2] = Vector3(GS::moveSpeed*strafe_lx, 0, GS::moveSpeed*strafe_lz);
+	Cdelta[3] = Vector3(-GS::moveSpeed*strafe_lx, 0, -GS::moveSpeed*strafe_lz);
+
 	look = Vector3(position.x + look.x, position.y + look.y, position.z + look.z);
 }
 
 void Character::moveCameraFB(float incrs) {
-
 	float lx = cos(yaw) * cos(pitch);
 	float ly = sin(pitch);
 	float lz = sin(yaw) * cos(pitch);
@@ -50,8 +56,8 @@ void Character::moveCameraFB(float incrs) {
 	position.z = position.z + incrs*lz;
 	Collision_Box.move_box(Vector3(incrs*lx, 0, incrs*lz));
 }
-void Character::moveCameraRL(float incrs) {
 
+void Character::moveCameraRL(float incrs) {
 	position.x = position.x + incrs*strafe_lx;
 	position.z = position.z + incrs*strafe_lz;
 	Collision_Box.move_box(Vector3(incrs*strafe_lx, 0, incrs*strafe_lz));
@@ -134,6 +140,11 @@ const Vector3 & Character::getLook() const
 	return look;
 }
 
+const Vector3 & Character::getCdelta(int num) const
+{
+	return Cdelta[num];
+}
+
 void Character::setFrontMove(bool b)
 {
 	front_move = b;
@@ -153,4 +164,24 @@ void Character::setLeftMove(bool b)
 void Character::setRightMove(bool b)
 {
 	right_move = b;
+}
+
+void Character::setFrontCollision(bool b)
+{
+	front_collision = b;
+}
+
+void Character::setBackCollision(bool b)
+{
+	back_collision = b;
+}
+
+void Character::setLeftCollision(bool b)
+{
+	left_collision = b;
+}
+
+void Character::setRightCollision(bool b)
+{
+	right_collision = b;
 }

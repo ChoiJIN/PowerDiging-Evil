@@ -4,5 +4,5 @@
 Debug GS::debug;
 bool GS::gameEnd = false;
 Character* GS::character;
-double GS::moveSpeed = 0.1;
+float GS::moveSpeed = 0.1f;
 GameOption GS::option;

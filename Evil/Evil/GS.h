@@ -20,7 +20,7 @@ public:
 	static GameOption option;
 	static Debug debug;
 	static Character* character;
-	static double moveSpeed;
+	static float moveSpeed;
 
 	static bool isGameEnd()
 	{
