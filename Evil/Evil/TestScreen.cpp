@@ -5,16 +5,21 @@
 TestScreen::TestScreen()
 {
 	// object initializtion
-	objs.push_back(Object(Vector3(5, -18, 0)));
+	// 0번 오브젝트는 문
+	objs.push_back(Object(Vector3(GS::option.roomSize, -18, 0)));
 	objs[0].loadObj("apple");
-	objs[0].set_passable(false);
 
-	objs.push_back(Object(Vector3(10, -18, 0)));
+	objs.push_back(Object(Vector3(5, -18, 0)));
 	objs[1].loadObj("apple");
 	objs[1].set_passable(false);
-	objs[1].setTracking(true);
-	objs[1].set_type(1);
-	objs[1].trackpos(character->getPosition());
+
+	objs.push_back(Object(Vector3(10, -18, 0)));
+	objs[2].loadObj("apple");
+	objs[2].set_passable(false);
+	objs[2].setTracking(true);
+	objs[2].set_type(1);
+	objs[2].trackpos(character->getPosition());
+
 	roomBox = Box(Vector3(0.f, 0.f, 0.f), (GS::option.roomSize*2), (GS::option.roomSize*2) + 4, (GS::option.roomSize*2));
 	
 }
@@ -27,8 +32,9 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
+	Screen::Object_Object_Collision_Detection();
 
-	Object_Tracking_Character(1);
+	Object_Tracking_Character(2);
 
 	Screen::Character_Room_Collision_Detection();
 	Screen::Character_Objects_Collision_Detection();
