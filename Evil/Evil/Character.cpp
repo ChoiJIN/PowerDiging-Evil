@@ -21,7 +21,7 @@ Character::~Character()
 }
 
 void Character::loadCinematic(string fileName) {
-	string cineName = fileName + ".txt";
+	string cineName = "Cinematics/" + fileName + ".txt";
 	loader.Load(cineName.c_str());
 	maxFrame = loader.returnVectorSize();
 }
@@ -121,10 +121,7 @@ Box Character::get_box()
 
 bool Character::collision_check(Box B, Vector3 delta)
 {
-	if (Collision_Box.collision_detection_3D(B, delta))
-		return true;
-	else
-		return false;
+	return Collision_Box.collision_detection_3D(B, delta);
 }
 
 void Character::rotateCamera(double mouseX, double mouseY)

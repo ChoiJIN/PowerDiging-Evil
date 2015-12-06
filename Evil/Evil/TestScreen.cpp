@@ -5,13 +5,17 @@
 TestScreen::TestScreen()
 {
 	// object initializtion
-	objs.push_back(Object(Vector3(0, -18, 0)));
+	objs.push_back(Object(Vector3(5, -18, 0)));
 	objs[0].loadObj("apple");
+	objs[0].set_passable(false);
+
 	objs.push_back(Object(Vector3(10, -18, 0)));
 	objs[1].loadObj("apple");
+	objs[1].set_passable(false);
 	objs[1].setTracking(true);
+	objs[1].set_type(1);
 	objs[1].trackpos(character->getPosition());
-	roomBox = Box(Vector3(0.f, 0.f, 0.f), (GS::option.roomSize*2), (GS::option.roomSize*2) + 4, (GS::option.roomSize*2));
+	roomBox = Box(Vector3(0.f, 0.f, 0.f), (GS::option.roomSize * 2), (GS::option.roomSize * 2) + 4, (GS::option.roomSize * 2));
 }
 
 
@@ -22,29 +26,11 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
-	if((objs[1].get_trackposition() - objs[1].get_box().get_cog()).length() < 1)
-		objs[1].trackpos(character->getPosition());
 
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
-	{
-		character->setFrontCollision(true);
-	}
-	else
-		character->setFrontCollision(false);
+	Object_Tracking_Character(1);
 
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(1)))
-	{
-		character->setBackCollision(true);
-	}
-	else
-		character->setBackCollision(false);
-
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(2)))
-	{
-		character->setLeftCollision(true);
-	}
-	else
-		character->setLeftCollision(false);
+	Screen::Character_Room_Collision_Detection();
+	Screen::Character_Objects_Collision_Detection();
 
 	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(3)))
 	{
@@ -54,11 +40,10 @@ void TestScreen::update(double delta)
 		character->setRightCollision(false);
 
 	if (!GS::inCinematic() && !character->getWatched()) {
-		if (character->getposX()>5)
+		if (character->getposX() > 5)
 		{
 			GS::setCinematic(true);
-			character->loadCinematic("cineFile_01");
-			
+			character->loadCinematic("test_cine");
 		}
 	}
 }
@@ -66,7 +51,7 @@ void TestScreen::update(double delta)
 void TestScreen::render()
 {
 	Screen::render();
-	GLuint t[6] = { 
+	GLuint t[6] = {
 		ImageLoader::getTextureId("brick.jpg"),
 		ImageLoader::getTextureId("brick.jpg"),
 		ImageLoader::getTextureId("brick_door.jpg"),
