@@ -20,6 +20,23 @@ Character::~Character()
 {
 }
 
+void Character::interact(bool val) {
+	isInteracting = val;
+}
+
+bool Character::checkInteract() {
+	return isInteracting;
+}
+
+bool Character::checkCollision() {
+	if (front_collision || back_collision || left_collision || right_collision) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 void Character::loadCinematic(string fileName) {
 	string cineName = "Cinematics/" + fileName + ".txt";
 	loader.Load(cineName.c_str());

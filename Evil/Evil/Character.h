@@ -38,6 +38,9 @@ public:
 	int currentFrame = 0;
 	int maxFrame = 0;
 	
+	void interact(bool val);
+	bool checkInteract();
+
 
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;
@@ -52,6 +55,7 @@ public:
 	void setBackCollision(bool b);
 	void setLeftCollision(bool b);
 	void setRightCollision(bool b);
+	bool checkCollision();
 
 private:
 	Vector3 position;
@@ -66,7 +70,8 @@ private:
 	bool back_collision = false;
 	bool left_collision = false;
 	bool right_collision = false;
-
+	bool isInteracting = false;
+	
 	unsigned char state = 0, Life = 50;
 	float lastX, lastY;
 	float yaw, pitch;

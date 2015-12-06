@@ -59,10 +59,31 @@ void Object::draw()
 		loader.Draw(cog);
 	}
 }
-
+//
 void Object::use()
 {
+	cog += Vector3(0, 2, 0);
+	
+	loader.Draw(cog);
 }
+
+Vector3 Object::getCog() {
+	return cog;
+}
+
+float Object::getCogX() {
+	return cog[0];
+}
+
+float Object::getCogY() {
+	return cog[1];
+}
+
+float Object::getCogZ() {
+	return cog[2];
+}
+
+//
 
 void Object::setTracking(bool t) // 트래킹 할 건지 말 건지 결정
 {
