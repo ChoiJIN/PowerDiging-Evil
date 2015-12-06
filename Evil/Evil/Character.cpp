@@ -28,6 +28,10 @@ bool Character::checkInteract() {
 	return isInteracting;
 }
 
+void Character::setLife() {
+	Life = 50;
+}
+
 bool Character::checkCollision() {
 	if (front_collision || back_collision || left_collision || right_collision) {
 		return true;

@@ -40,7 +40,7 @@ public:
 	
 	void interact(bool val);
 	bool checkInteract();
-
+	void setLife();
 
 	const Vector3& getPosition() const;
 	const Vector3& getLook() const;

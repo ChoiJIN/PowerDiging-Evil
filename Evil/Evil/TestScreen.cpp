@@ -52,9 +52,11 @@ void TestScreen::update(double delta)
 	}*/
 
 	//if (sqrt(pow((GS::character->getposX() - objs.at(0).getCog()[0]),2)+ pow(( (-18)- objs.at(0).getCog()[1]), 2)+ pow((GS::character->getposZ() - objs.at(0).getCog()[2]), 2))<3) {
-	if(GS::character->checkInteract() && GS::character->checkCollision()){
-		objs.at(0).use();
+	if(GS::character->checkInteract() && GS::character->checkCollision()){  // 인터렉션과 콜리젼을 둘다 체크.
+				objs.erase(objs.begin()); // 현재는 0번째 물체가 콜리젼 실험대상이었으므로 0번을 제거.
+				GS::character->setLife();  // 체력 재설정.
 	}
+
 }
 
 void TestScreen::render()
