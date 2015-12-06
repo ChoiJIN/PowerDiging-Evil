@@ -46,6 +46,7 @@ public:
 	Vector3 get_trackposition();
 
 	Box get_box();
+	void setBoxSize(int X, int Y, int Z);
 
 	Matrix4 get_matrix();
 };

@@ -90,6 +90,11 @@ Box Object::get_box()
 	return Collision_Box;
 }
 
+void Object::setBoxSize(int X, int Y, int Z)
+{
+	Collision_Box.set_box(cog, X, Y, Z);
+}
+
 Matrix4 Object::get_matrix()
 {
 	return obj_matrix;
