@@ -26,46 +26,10 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
-	if (character->collision_check(objs[1].get_box(), Vector3(0, 0, 0))
-		|| objs[1].get_box().collision_detection_3D(character->get_box(), Vector3(0, 0, 0)))
-	{ 
-		objs[1].setTracking(false);
-	}
-	else
-	{
-		objs[1].setTracking(true);
-		objs[1].trackpos(character->getPosition());
-	}
-		
 
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
-	{
-		character->setFrontCollision(true);
-	}
-	else
-		character->setFrontCollision(false);
+	Object_Tracking_Character(1);
 
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(1)))
-	{
-		character->setBackCollision(true);
-	}
-	else
-		character->setBackCollision(false);
-
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(2)))
-	{
-		character->setLeftCollision(true);
-	}
-	else
-		character->setLeftCollision(false);
-
-	if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(3)))
-	{
-		character->setRightCollision(true);
-	}
-	else
-		character->setRightCollision(false);
-
+	Screen::Character_Room_Collision_Detection();
 	Screen::Character_Objects_Collision_Detection();
 }
 

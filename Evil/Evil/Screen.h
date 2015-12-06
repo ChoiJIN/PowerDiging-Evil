@@ -82,7 +82,7 @@ public:
 
 	}
 
-	void Character_Objects_Collision_Detection()
+	inline void Character_Objects_Collision_Detection()
 	{
 		for (int i = 0; i < objs.size(); i++)
 		{
@@ -109,6 +109,51 @@ public:
 					character->setRightCollision(true);
 				}
 			}
+		}
+	}
+
+	inline void Character_Room_Collision_Detection()
+	{
+		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
+		{
+			character->setFrontCollision(true);
+		}
+		else
+			character->setFrontCollision(false);
+
+		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(1)))
+		{
+			character->setBackCollision(true);
+		}
+		else
+			character->setBackCollision(false);
+
+		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(2)))
+		{
+			character->setLeftCollision(true);
+		}
+		else
+			character->setLeftCollision(false);
+
+		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(3)))
+		{
+			character->setRightCollision(true);
+		}
+		else
+			character->setRightCollision(false);
+	}
+
+	void Object_Tracking_Character(int index)
+	{
+		if (character->collision_check(objs[index].get_box(), Vector3(0, 0, 0))
+			|| objs[index].get_box().collision_detection_3D(character->get_box(), Vector3(0, 0, 0)))
+		{
+			objs[index].setTracking(false);
+		}
+		else
+		{
+			objs[index].setTracking(true);
+			objs[index].trackpos(character->getPosition());
 		}
 	}
 
