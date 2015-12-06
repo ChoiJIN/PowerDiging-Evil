@@ -32,6 +32,16 @@ void Character::RefreshCamera() {
 	look = Vector3(position.x + look.x, position.y + look.y, position.z + look.z);
 }
 
+void Character::moveFunction(float incrs, int type) // type = 0 : FB, type = 1 : RL
+{
+	if (type == 0)
+		moveCameraFB(incrs);
+	else if (type == 1)
+		moveCameraRL(incrs);
+	else
+		GS::debug.log("move error");
+}
+
 void Character::moveCameraFB(float incrs) {
 	float lx = cos(yaw) * cos(pitch);
 	float ly = sin(pitch);
