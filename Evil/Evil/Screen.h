@@ -39,7 +39,7 @@ public:
 			if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
 				|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 			{
-				if (objs[i].getTracking() && (currentTime - crashTime) > 2)
+				if (objs[i].get_type() == 1 && (currentTime - crashTime) > 2)
 				{
 					crashTime = currentTime;
 					GS::character->setLife(GS::character->getLife() - 1);
@@ -80,6 +80,36 @@ public:
 	void getDamaged()
 	{
 
+	}
+
+	void Character_Objects_Collision_Detection()
+	{
+		for (int i = 0; i < objs.size(); i++)
+		{
+			if (objs[i].get_passable() == false)
+			{
+				if (character->collision_check(objs[i].get_box(), character->getCdelta(0))
+					|| objs[i].get_box().collision_detection_3D(character->get_box(), -character->getCdelta(0)))
+				{
+					character->setFrontCollision(true);
+				}
+				if (character->collision_check(objs[i].get_box(), character->getCdelta(1))
+					|| objs[i].get_box().collision_detection_3D(character->get_box(), -character->getCdelta(1)))
+				{
+					character->setBackCollision(true);
+				}
+				if (character->collision_check(objs[i].get_box(), character->getCdelta(2))
+					|| objs[i].get_box().collision_detection_3D(character->get_box(), -character->getCdelta(2)))
+				{
+					character->setLeftCollision(true);
+				}
+				if (character->collision_check(objs[i].get_box(), character->getCdelta(3))
+					|| objs[i].get_box().collision_detection_3D(character->get_box(), -character->getCdelta(3)))
+				{
+					character->setRightCollision(true);
+				}
+			}
+		}
 	}
 
 protected:

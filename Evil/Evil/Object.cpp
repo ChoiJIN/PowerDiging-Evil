@@ -6,18 +6,28 @@ Object::Object()
 {
 	cog = Vector3(0.f, 0.f, 0.f);
 	obj_matrix.identity();
-	Collision_Box = Box(cog, 2, 2, 2);
+	Collision_Box = Box(cog, 2, 1, 2);
 }
 
 Object::Object(Vector3 center)
 {
 	cog = center;
 	obj_matrix.identity();
-	Collision_Box = Box(cog, 2, 2, 2);
+	Collision_Box = Box(cog, 2, 1, 2);
 }
 
 Object::~Object()
 {
+}
+
+void Object::set_passable(bool b)
+{
+	passable = b;
+}
+
+bool Object::get_passable()
+{
+	return passable;
 }
 
 void Object::loadObj(string fileName)
@@ -27,6 +37,10 @@ void Object::loadObj(string fileName)
 	loader.Load(objName.c_str(), materialName.c_str());
 }
 
+void Object::set_type(unsigned char c)
+{
+	type = c;
+}
 unsigned char Object::get_type()
 {
 	return type;
