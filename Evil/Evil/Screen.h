@@ -20,6 +20,9 @@ public:
 	Screen()
 	{
 		character = GS::character;
+		hpBar = Object(Vector3(0, 8, 0));
+		hpBar.loadObj("merong");
+		uiComponent.push_back(hpBar);
 	}
 
 	virtual ~Screen()
@@ -28,17 +31,17 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		 if(GS::inCinematic()){
+		if (GS::inCinematic()) {
 			character->playCinematic();
-			if (character->currentFrame > character->maxFrame-1) {
+			if (character->currentFrame > character->maxFrame - 1) {
 				character->alreadyWatched(); // 마지막프레임까지 가면 이미본걸로 체크
 				GS::setCinematic(false); // 다시 시네마틱을 보지 않는 상황으로 전환.
-				character->currentFrame = 0; 
+				character->currentFrame = 0;
 			}
-		 }
-		 else {
-			 character->RefreshCamera();
-		 }
+		}
+		else {
+			character->RefreshCamera();
+		}
 		currentTime = time(NULL);
 
 		if (GS::character->getLife() == 0)
@@ -54,13 +57,23 @@ public:
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// UI
+		glMatrixMode(GL_PROJECTION);
+		perspective = GLUtil::Ortho(-10, 10, -10, 10, 0.01, 100);
+		glLoadMatrixf(perspective.get());
 		glMatrixMode(GL_MODELVIEW);
-		Matrix4 look = GLUtil::LookAt(GS::character->getPosition(), GS::character->getLook(), Vector3(0, 1, 0));
-		Matrix4 perspective = GLUtil::perspective(90.f, 1, 0.01f, 100.0f);
+		glLoadIdentity();
+		uiComponent[0].draw();
+
+		glMatrixMode(GL_PROJECTION);
+		perspective = GLUtil::perspective(90.f, 1, 0.01f, 100.0f);
+		glLoadMatrixf(perspective.get());
+
+		glMatrixMode(GL_MODELVIEW);
+		modelview = GLUtil::LookAt(GS::character->getPosition(), GS::character->getLook(), Vector3(0, 1, 0));
 
 		glLoadIdentity();
-		glMultMatrixf(perspective.get());
-		glMultMatrixf(look.get());
+		glMultMatrixf(modelview.get());
 
 		for (size_t i = 0; i < objs.size(); i++)
 			objs[i].draw();
@@ -172,8 +185,11 @@ public:
 
 protected:
 	Character* character;
+	std::vector<Object> uiComponent;
 	std::vector<Object> objs;
 	Box roomBox;
+	Object hpBar;
+	Matrix4 modelview, perspective;
 
 private:
 	time_t currentTime;
