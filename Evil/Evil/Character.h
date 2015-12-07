@@ -67,7 +67,7 @@ private:
 	bool left_collision = false;
 	bool right_collision = false;
 
-	unsigned char state = 0, Life = 50;
+	unsigned char state = 0, Life = 10;
 	float lastX, lastY;
 	float yaw, pitch;
 	float strafe_lx, strafe_lz;

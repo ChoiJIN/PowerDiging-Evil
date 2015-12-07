@@ -20,9 +20,9 @@ public:
 	Screen()
 	{
 		character = GS::character;
-		hpBar = Object(Vector3(0, 8, 0));
-		hpBar.loadObj("merong");
 		uiComponent.push_back(hpBar);
+		uiComponent[0] = Object(Vector3(0, 8, 0));
+		uiComponent[0].loadObj("hp" + to_string(1));
 	}
 
 	virtual ~Screen()
@@ -44,9 +44,8 @@ public:
 		}
 		currentTime = time(NULL);
 
-		if (GS::character->getLife() == 0)
+		if (character->getLife() == 0)
 			GS::setGameEnd(true);
-
 	}
 
 	virtual void render() = 0
@@ -70,7 +69,7 @@ public:
 		glLoadMatrixf(perspective.get());
 
 		glMatrixMode(GL_MODELVIEW);
-		modelview = GLUtil::LookAt(GS::character->getPosition(), GS::character->getLook(), Vector3(0, 1, 0));
+		modelview = GLUtil::LookAt(character->getPosition(), character->getLook(), Vector3(0, 1, 0));
 
 		glLoadIdentity();
 		glMultMatrixf(modelview.get());
@@ -121,15 +120,17 @@ public:
 			}
 
 			// 캐릭터가 현재 오브젝트와 충돌한 경우
-			if (GS::character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
-				|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
+			if (character->collision_check(objs[i].get_box(), Vector3(0.f, 0.f, 0.f))
+				|| objs[i].get_box().collision_detection_3D(character->get_box(), Vector3(0.f, 0.f, 0.f))) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 			{
 				// 오브젝트의 get_type가 1일 경우는 2초마다 Life를 1씩 깎도록 한다.
 				if (objs[i].get_type() == 1 && (currentTime - crashTime) > 2)
 				{
 					crashTime = currentTime;
-					GS::character->setLife(GS::character->getLife() - 1);
-					cout << "현재 라이프 = " << (int)GS::character->getLife() << endl;
+					character->setLife(character->getLife() - 1);
+					uiComponent[0] = Object(Vector3(0, 8, 0));
+					uiComponent[0].loadObj("hp" + to_string(character->getLife()));
+					cout << "현재 라이프 = " << (int)character->getLife() << endl;
 				}
 			}
 		}
