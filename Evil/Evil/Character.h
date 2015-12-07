@@ -72,7 +72,7 @@ private:
 	bool left_collision = false;
 	bool right_collision = false;
 
-	unsigned char state = 0, Life = 10;
+	unsigned char state = 0, Life = 1;
 	bool isInteracting = false;
 
 	float lastX, lastY;

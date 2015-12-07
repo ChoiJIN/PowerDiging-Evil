@@ -48,11 +48,11 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
-	if (!tracking)
+	if (collision || !tracking)
 	{
 		loader.Draw(cog);
 	}
-	else
+	else // collision == true && tracking == true
 	{
 		cog += speed;
 		Collision_Box.move_box(speed);
@@ -83,7 +83,15 @@ float Object::getCogZ() {
 	return cog[2];
 }
 
-//
+void Object::setCollision(bool b)
+{
+	collision = b;
+}
+
+bool Object::getCollision()
+{
+	return collision;
+}
 
 void Object::setTracking(bool t) // 트래킹 할 건지 말 건지 결정
 {
@@ -98,12 +106,22 @@ bool Object::getTracking()
 void Object::trackpos(Vector3 vec) // 누구를 트래킹할지 결정
 {
 	trackPosition = vec;
-	speed = 0.02f*tracking*(trackPosition - cog);
+	speed = 0.1f*tracking*(trackPosition - cog).normalize();
 }
 
 Vector3 Object::get_trackposition()
 {
 	return trackPosition;
+}
+
+void Object::set_speed(Vector3 v)
+{
+	speed = v;
+}
+
+Vector3 Object::get_speed()
+{
+	return speed;
 }
 
 Box Object::get_box()
