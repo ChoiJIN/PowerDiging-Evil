@@ -154,6 +154,10 @@ void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, 
 		if (action == GLFW_PRESS) GS::character->setBackMove(true);
 		else if (action == GLFW_RELEASE) GS::character->setBackMove(false);
 		break;
+	case GLFW_KEY_E:
+		if (action == GLFW_PRESS) GS::character->interact(true);
+		else if (action == GLFW_RELEASE) GS::character->interact(false);
+		break;
 	}
 }
 

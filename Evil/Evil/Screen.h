@@ -19,6 +19,9 @@ public:
 	Screen()
 	{
 		character = GS::character;
+		uiComponent.push_back(hpBar);
+		uiComponent[0] = Object(Vector3(0, 8, 0));
+		uiComponent[0].loadObj("hp" + to_string(character->getLife()));
 	}
 
 	virtual ~Screen()
@@ -27,30 +30,53 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		character->RefreshCamera();
+		if (GS::inCinematic()) {
+			character->playCinematic();
+			if (character->currentFrame > character->maxFrame - 1) {
+				character->alreadyWatched();
+				GS::setCinematic(false);
+				character->currentFrame = 0;
+			}
+		}
+		else {
+			character->RefreshCamera();
+		}
 
 		currentTime = time(NULL);
 
 		if (character->getLife() == 0)
 			GS::setGameEnd(true);
-
 	}
 
 	virtual void render() = 0
 	{
-		//cout << "Screen.h의 render()" << endl;s
-		//cout << "여기에 모든 Screen에서 적용할 model, view 행렬을 호출하면 된다." << endl;
-
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// UI
 		glMatrixMode(GL_PROJECTION);
-		Matrix4 look = GLUtil::LookAt(character->getPosition(), character->getLook(), Vector3(0, 1, 0));
-		Matrix4 perspective = GLUtil::perspective(90.f, 1, 0.01f, 100.0f);
+		perspective = GLUtil::Ortho(-10, 10, -10, 10, 0.01, 100);
+		glLoadMatrixf(perspective.get());
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
+		if (hpVal != character->getLife()) {
+			uiComponent[0] = Object(Vector3(0, 8, 0));
+			uiComponent[0].loadObj("hp" + to_string(character->getLife()));
+			hpVal = character->getLife();
+		}
+
+		uiComponent[0].draw();
+
+		glMatrixMode(GL_PROJECTION);
+		perspective = GLUtil::perspective(90.f, 1, 0.01f, 100.0f);
+		glLoadMatrixf(perspective.get());
+
+		glMatrixMode(GL_MODELVIEW);
+		modelview = GLUtil::LookAt(character->getPosition(), character->getLook(), Vector3(0, 1, 0));
 
 		glLoadIdentity();
-		glMultMatrixf(perspective.get());
-		glMultMatrixf(look.get());
+		glMultMatrixf(modelview.get());
 
 		for (size_t i = 0; i < objs.size(); i++)
 			objs[i].draw();
@@ -75,7 +101,7 @@ public:
 			if (objs[i].get_passable() == false)
 			{
 				// 캐릭터가 키를 입력받아 이동하는 4가지 경우에 오브젝트와 충돌하는 지 점검, 충돌할 경우에는 캐릭터의 Collision 멤버 변수가 "true"가 된다.
-				if (character->collision_check(objs[i].get_box(), character->getCdelta(0)/character->getCdelta(0).length())
+				if (character->collision_check(objs[i].get_box(), character->getCdelta(0) / character->getCdelta(0).length())
 					|| objs[i].get_box().collision_detection_3D(character->get_box(), -character->getCdelta(0) / character->getCdelta(0).length()))
 				{
 					character->setFrontCollision(true);
@@ -98,8 +124,8 @@ public:
 			}
 
 			// 캐릭터가 현재 오브젝트와 충돌한 경우
-			if (character->collision_check(objs[i].get_box(), -objs[i].get_speed())
-				|| objs[i].get_box().collision_detection_3D(character->get_box(), objs[i].get_speed())) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
+			if (GS::character->collision_check(objs[i].get_box(), -objs[i].get_speed())
+				|| objs[i].get_box().collision_detection_3D(GS::character->get_box(), objs[i].get_speed())) // 충돌 했을때 하면 true, 아니면 false 이걸로 뭘 할진 생각해 보자.
 			{
 				// 오브젝트의 get_type가 1일 경우는 2초마다 Life를 1씩 깎도록 한다.
 				if (objs[i].get_type() == 1 && (currentTime - crashTime) > 2)
@@ -114,21 +140,21 @@ public:
 
 	inline void Object_Object_Collision_Detection()
 	{
-		for (size_t i = 0; i < objs.size(); i++)
-			for (size_t j = 0; j < objs.size(); j++)
+		for (size_t i = 1; i < objs.size(); i++)
+			for (size_t j = 1; j < objs.size(); j++)
 			{
 				if (objs[i].getTracking() == true && i != j) // i가 무언가를 추적할 때
 					if (objs[i].get_passable() == false && objs[j].get_passable() == false) // i와 j가 모두 통과 불가능한 물체일 때
 						if (objs[i].get_box().collision_detection_3D(objs[j].get_box(), objs[i].get_speed()) || objs[j].get_box().collision_detection_3D(objs[i].get_box(), -objs[i].get_speed()))
 						{
-//							                     cout << i << " 오브젝트의 speed = " << objs[i].get_speed();
-							objs[i].set_speed(Vector3(1.1*(cos(M_PI / 18)*objs[i].get_speed().x - sin(M_PI / 18)*objs[i].get_speed().z), objs[i].get_speed().y, 1.1*(sin(M_PI / 18)*objs[i].get_speed().x + cos(M_PI / 18)*objs[i].get_speed().z)));
-//							                     cout << " -> " << objs[i].get_speed() << endl;
+							//							cout << i << " 오브젝트의 speed = " << objs[i].get_speed();
+							objs[i].set_speed(Vector3(cos(M_PI / 18)*objs[i].get_speed().x - sin(M_PI / 18)*objs[i].get_speed().z, objs[i].get_speed().y, sin(M_PI / 18)*objs[i].get_speed().x + cos(M_PI / 18)*objs[i].get_speed().z));
+							//							cout << " -> " << objs[i].get_speed() << endl;
 							objs[i].setCollision(true);
-							//                  cout << i << " 오브젝트와 " << j << "오브젝트 충돌 체크" << endl;
+							//						cout << i << " 오브젝트와 " << j << "오브젝트 충돌 체크" << endl;
 						}
-						else if (objs[i].get_box().collision_detection_3D(objs[j].get_box(), 0.05f*objs[i].getTracking()*(character->getPosition() - objs[i].get_box().get_cog()).normalize())
-							|| objs[j].get_box().collision_detection_3D(objs[i].get_box(), -0.05f*objs[i].getTracking()*(character->getPosition() - objs[i].get_box().get_cog()).normalize()))
+						else if (objs[i].get_box().collision_detection_3D(objs[j].get_box(), 0.1f*objs[i].getTracking()*(objs[i].get_trackposition() - objs[i].get_box().get_cog()).normalize())
+							|| objs[j].get_box().collision_detection_3D(objs[i].get_box(), -0.1f*objs[i].getTracking()*(objs[i].get_trackposition() - objs[i].get_box().get_cog())))
 						{
 							objs[i].setCollision(false);
 						}
@@ -142,7 +168,6 @@ public:
 
 	inline void Character_Room_Collision_Detection() // 캐릭터가 방 밖으로 나가려 하는 경우
 	{
-		// 캐릭터가 키를 입력받아 이동하는 4가지 경우에 벽을 뚫는 지 점검, 충돌할 경우에는 캐릭터의 Collision 멤버 변수가 "true"가 된다.
 		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
 		{
 			character->setFrontCollision(true);
@@ -180,31 +205,24 @@ public:
 			|| objs[index].get_box().collision_detection_3D(character->get_box(), objs[index].get_speed()))
 		{
 			objs[index].setTracking(false);
-			//         objs[index].trackpos(character->getPosition());
 		}
-		//      else if(objs[index].getCollision() == true)
-		//      {
-		//         objs[index].setTracking(true);
-		//      }
 		else
 		{
 			objs[index].setTracking(true);
-			//         objs[index].trackpos(character->getPosition());
 		}
-
-		//      cout << index << " 오브젝트의 speed = " << objs[index].get_speed() << endl;
-		//      cout << index << " 오브젝트의 속력 = " << objs[index].get_speed().length() << endl;
-		cout << "Object " << index << "의 tracking = " << objs[index].getTracking() << endl;
-		cout << "Object " << index << "의 collision = " << objs[index].getCollision() << endl;
 	}
 
 protected:
 
 	Character* character;
+	std::vector<Object> uiComponent;
 	std::vector<Object> objs;
 	Box roomBox;
+	Object hpBar;
+	Matrix4 modelview, perspective;
 
 private:
 	time_t currentTime;
 	time_t crashTime = 0;
+	int hpVal = 1;
 };

@@ -1,4 +1,4 @@
-newmtl Apple:Apple_skin
+newmtl apple:Apple_skin
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
@@ -7,7 +7,7 @@ map_Kd Apple_Sphere.png
 Ni 1.00
 Ks 0.50 0.50 0.50
 Ns 96.08
-newmtl Apple:Twig_skin
+newmtl apple:Twig_skin
 illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00

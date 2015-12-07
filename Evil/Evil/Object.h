@@ -15,6 +15,9 @@ private:
 	bool passable = true;
 	bool collision = false;
 	Vector3 cog;
+	float cogx;
+	float cogy;
+	float cogz;
 	Vector3 trackPosition;
 	Vector3 speed = Vector3(0.f, 0.f, 0.f);
 	Matrix4 obj_matrix;
@@ -34,6 +37,8 @@ public:
 	void set_type(unsigned char c);
 	unsigned char get_type();
 
+
+
 	void loadObj(string filename);
 
 	void draw();
@@ -48,13 +53,20 @@ public:
 
 	void trackpos(Vector3 vec);
 	Vector3 get_trackposition();
-
+	
 	void set_speed(Vector3 v);
 	Vector3 get_speed();
 
 	Box get_box();
 	void setBoxSize(int X, int Y, int Z);
+	//
 
+	Vector3 getCog();
+	float getCogX();
+	float getCogY();
+	float getCogZ();
+
+	//
 	Matrix4 get_matrix();
 };
 

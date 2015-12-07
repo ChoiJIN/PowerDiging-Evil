@@ -1,0 +1,20 @@
+# This file uses centimeters as units for non-parametric coordinates.
+
+mtllib hp8.mtl
+g default
+v -2.880219 0.564938 -0.844435
+v 2.880219 0.564938 -0.844435
+v -2.880219 -0.564938 -0.844435
+v 2.880219 -0.564938 -0.844435
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vt 0.000000 1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+vn 0.000000 0.000000 -1.000000
+s off
+g hpbar:pPlane1
+usemtl hpbar:initialShadingGroup
+f 1/1/1 2/2/2 4/3/3 3/4/4

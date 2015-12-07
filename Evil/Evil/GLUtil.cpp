@@ -57,3 +57,16 @@ Matrix4 GLUtil::frustum(float left, float right, float bottom, float top, float 
 		0.0f, 0.0f, -(2.0f * f * n) / (f - n), 0.0f);
 	return result;
 }
+
+Matrix4 GLUtil::Ortho(const float left, const float right, const float bottom, const float top, const float zNear, const float zFar)
+{
+	Matrix4 c;
+	c[0] = 2.0 / (right - left);
+	c[5] = 2.0 / (top - bottom);
+	c[10] = 2.0 / (zNear - zFar);
+	c[15] = 1.0;
+	c[12] = -(right + left) / (right - left);
+	c[13] = -(top + bottom) / (top - bottom);
+	c[14] = -(zFar + zNear) / (zFar - zNear);
+	return c;
+}

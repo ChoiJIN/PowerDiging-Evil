@@ -37,7 +37,7 @@ public:
 	// Cinematic을 실행할 조건이냐
 	static bool inCinematic() 
 	{
-		return !character->getWatched() && isCinematicPlaying;
+		return isCinematicPlaying;
 	}
 
 	static void setCinematic(bool val) 
