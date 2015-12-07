@@ -12,6 +12,11 @@ TestScreen::TestScreen()
 	apple.setTracking(true);
 	apple.set_type(1);
 	apple.trackpos(character->getPosition());
+
+	objs.push_back(Object(Vector3(10, -18, 0)));
+	objs[1].loadObj("apple");
+	objs[1].set_passable(false);
+
 	roomBox = Box(Vector3(0.f, 0.f, 0.f), (GS::option.roomSize * 2), (GS::option.roomSize * 2) + 4, (GS::option.roomSize * 2));
 }
 
@@ -23,6 +28,19 @@ TestScreen::~TestScreen()
 void TestScreen::update(double delta)
 {
 	Screen::update(delta);
+
+	if (GS::inCinematic()) {
+		character->playCinematic();
+		if (character->currentFrame > character->maxFrame - 1) {
+			character->alreadyWatched(); // ??????????????? ???? ??????? ??
+			GS::setCinematic(false); // ??? ??????? ???? ??? ??????? ???.
+			character->currentFrame = 0;
+		}
+	}
+	else {
+		character->RefreshCamera();
+	}
+
 
 	Object_Tracking_Character(0);
 
@@ -36,13 +54,11 @@ void TestScreen::update(double delta)
 	else
 		character->setRightCollision(false);
 
-	if (!GS::inCinematic() && !character->getWatched()) {
-		if (character->getposX() > 5)
-		{
-			GS::setCinematic(true);
-			character->loadCinematic("test_cine");
-		}
+	if (GS::character->checkInteract() && GS::character->checkCollision()) {  // 인터렉션과 콜리젼을 둘다 체크.
+		objs.erase(objs.begin()); // 현재는 0번째 물체가 콜리젼 실험대상이었으므로 0번을 제거.
+		character->setLife(character->getLife()+1);
 	}
+
 }
 
 void TestScreen::render()

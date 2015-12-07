@@ -7,14 +7,12 @@
 #include "Screen.h"
 #include "GLDraw.h"
 
-class TestScreen :
-	public Screen
+class SecondRoom : public Screen
 {
-
 public:
-	TestScreen();
-	~TestScreen();
-	
+	SecondRoom();
+	~SecondRoom();
+
 	virtual void update(double delta);
 	virtual void render();
 };

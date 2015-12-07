@@ -22,7 +22,7 @@ public:
 		character = GS::character;
 		uiComponent.push_back(hpBar);
 		uiComponent[0] = Object(Vector3(0, 8, 0));
-		uiComponent[0].loadObj("hp" + to_string(1));
+		uiComponent[0].loadObj("hp" + to_string(character->getLife()));
 	}
 
 	virtual ~Screen()
@@ -31,17 +31,7 @@ public:
 
 	virtual void update(double delta) = 0
 	{
-		if (GS::inCinematic()) {
-			character->playCinematic();
-			if (character->currentFrame > character->maxFrame - 1) {
-				character->alreadyWatched(); // 마지막프레임까지 가면 이미본걸로 체크
-				GS::setCinematic(false); // 다시 시네마틱을 보지 않는 상황으로 전환.
-				character->currentFrame = 0;
-			}
-		}
-		else {
-			character->RefreshCamera();
-		}
+		
 		currentTime = time(NULL);
 
 		if (character->getLife() == 0)
@@ -50,9 +40,6 @@ public:
 
 	virtual void render() = 0
 	{
-		//cout << "Screen.h의 render()" << endl;s
-		//cout << "여기에 모든 Screen에서 적용할 model, view 행렬을 호출하면 된다." << endl;
-
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -62,6 +49,13 @@ public:
 		glLoadMatrixf(perspective.get());
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+
+		if (hpVal != character->getLife()) {
+			uiComponent[0] = Object(Vector3(0, 8, 0));
+			uiComponent[0].loadObj("hp" + to_string(character->getLife()));
+			hpVal = character->getLife();
+		}
+
 		uiComponent[0].draw();
 
 		glMatrixMode(GL_PROJECTION);
@@ -128,8 +122,6 @@ public:
 				{
 					crashTime = currentTime;
 					character->setLife(character->getLife() - 1);
-					uiComponent[0] = Object(Vector3(0, 8, 0));
-					uiComponent[0].loadObj("hp" + to_string(character->getLife()));
 					cout << "현재 라이프 = " << (int)character->getLife() << endl;
 				}
 			}
@@ -195,4 +187,5 @@ protected:
 private:
 	time_t currentTime;
 	time_t crashTime = 0;
+	int hpVal = 10;
 };

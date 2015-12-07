@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include <gl/glew.h>
+
 #include "GLPrimitive.h"
 
 class GLCube : public GLPrimitive {
