@@ -48,22 +48,24 @@ unsigned char Object::get_type()
 
 void Object::draw()
 {
-	if (collision || !tracking)
-	{
-		loader.Draw(cog);
-	}
-	else // collision == true && tracking == true
+	loader.Draw(cog);
+}
+//
+
+void Object::update(double delta)
+{
+	if (collision == false && tracking == 1)
 	{
 		cog += speed;
 		Collision_Box.move_box(speed);
-		loader.Draw(cog);
 	}
+	else if (tracking == 2)
+		tracking = 1;
 }
-//
+
 void Object::use()
 {
 	cog += Vector3(0, 2, 0);
-	
 	loader.Draw(cog);
 }
 
@@ -93,20 +95,20 @@ bool Object::getCollision()
 	return collision;
 }
 
-void Object::setTracking(bool t) // 트래킹 할 건지 말 건지 결정
+void Object::setTracking(unsigned char t) // 트래킹 안하는 물체로 바꿀건지, 정지할 건지, 트래킹 할 건지
 {
 	tracking = t;
 }
 
-bool Object::getTracking()
+unsigned char Object::getTracking()
 {
 	return tracking;
 }
 
-void Object::trackpos(Vector3 vec) // 누구를 트래킹할지 결정
+void Object::setTarget(Vector3 vec) // 누구를 트래킹할지 결정
 {
 	trackPosition = vec;
-	speed = 0.1f*tracking*(trackPosition - cog).normalize();
+	speed = Vector3(0.1f*(trackPosition - cog).normalize().x, 0, 0.1f*(trackPosition - cog).normalize().z);
 }
 
 Vector3 Object::get_trackposition()

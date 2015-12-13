@@ -41,6 +41,7 @@ public:
 	float ZLength(); // length(p4 - p0)
 	bool collision_detection_in(Box iBox, Vector3 delta); // 2D 충돌 체크
 	bool collision_detection_3D(Box iBox, Vector3 delta); // 3D 충돌 체크
+	bool collision_detection_3D_mutal(Box iBox, Vector3 delta); // 3D 상호충돌 체크
 
 private:
 	// 반시계 방향, 아랫면 : p0 p1 p2 p3(각각 1, 2, 3, 4 사분면), 아랫면과 대응되게 p4, p5, p6, p7(각각 1, 2, 3, 4 사분면)

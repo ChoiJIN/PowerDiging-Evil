@@ -138,7 +138,7 @@ Box Character::get_box()
 
 bool Character::collision_check(Box B, Vector3 delta)
 {
-	return Collision_Box.collision_detection_3D(B, delta);
+	return Collision_Box.collision_detection_3D_mutal(B, delta);
 }
 
 void Character::rotateCamera(double mouseX, double mouseY)
