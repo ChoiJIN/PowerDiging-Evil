@@ -22,11 +22,11 @@ Character::~Character()
 
 void Character::interact(bool val) {
 	isInteracting = val;
-}
+} // ³ª ¾Æ´Ô
 
 bool Character::checkInteract() {
 	return isInteracting;
-}
+} // ³ª ¾Æ´Ô
 
 bool Character::checkCollision() {
 	if (front_collision || back_collision || left_collision || right_collision) {
@@ -35,22 +35,22 @@ bool Character::checkCollision() {
 	else {
 		return false;
 	}
-}
+} // ³ª ¾Æ´Ô
 
 void Character::loadCinematic(string fileName) {
 	string cineName = "Cinematics/" + fileName + ".txt";
 	loader.Load(cineName.c_str());
 	maxFrame = loader.returnVectorSize();
-}
+} // ³ª ¾Æ´Ô
 
 void Character::alreadyWatched() {
 	watched = true;
 	GS::setCinematic(false);
-}
+} // ³ª ¾Æ´Ô
 
 bool Character::getWatched() {
 	return watched;
-}
+} // ³ª ¾Æ´Ô
 
 void Character::playCinematic() {
 	if (maxFrame > currentFrame) {

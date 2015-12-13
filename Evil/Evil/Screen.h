@@ -93,7 +93,7 @@ public:
 
 	}
 
-	inline void Character_Objects_Collision_Detection() // 캐릭터와 오브젝트가 충돌했는 지 update 마다 체크한다.
+	void Character_Objects_Collision_Detection() // 캐릭터와 오브젝트가 충돌했는 지 update 마다 체크한다.
 	{
 		for (size_t i = 0; i < objs.size(); i++) // 모든 오브젝트를 검사
 		{
@@ -134,11 +134,16 @@ public:
 					character->setLife(character->getLife() - 1);
 					cout << "현재 라이프 = " << (int)character->getLife() << endl;
 				}
+				if (GS::character->checkInteract() && objs[i].get_type() == 2) {  // 인터렉션과 콜리젼을 둘다 체크.
+//					objs.erase(objs.begin() + i); // erase로 제거하면 추적하던 오브젝트가 방향을 다시 잡는것을 포기함 이 현상을 고쳐야 할 것
+					objs[i] = Object();
+					character->setLife(character->getLife() + 1);
+				}
 			}
 		}
 	}
 
-	inline void Object_Object_Collision_Detection()
+	void Object_Object_Collision_Detection()
 	{
 		for (size_t i = 1; i < objs.size(); i++)
 			for (size_t j = 1; j < objs.size(); j++)
@@ -166,7 +171,7 @@ public:
 			}
 	}
 
-	inline void Character_Room_Collision_Detection() // 캐릭터가 방 밖으로 나가려 하는 경우
+	void Character_Room_Collision_Detection() // 캐릭터가 방 밖으로 나가려 하는 경우
 	{
 		if (!roomBox.collision_detection_in(character->get_box(), character->getCdelta(0)))
 		{

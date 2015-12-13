@@ -24,7 +24,7 @@ private:
 	Box Collision_Box;
 	CObjLoader loader;
 	bool tracking = false;
-	unsigned char type = 0; // 충돌할 경우 데미지를 주는 타입인지, 아닌지를 확인해야 한다. 0 : 일반 오브젝트, 1 : 데미지를 1씩 준다.
+	unsigned char type = 0; // 충돌할 경우 데미지를 주는 타입인지, 아닌지를 확인해야 한다. 0 : 일반 오브젝트, 1 : 데미지를 1씩 준다. 2 : 먹을 수 있다.
 
 public:
 	Object();

@@ -8,6 +8,7 @@ TestScreen::TestScreen()
 	// 0번 오브젝트는 문
 	objs.push_back(Object(Vector3(GS::option.roomSize, -18, 0)));
 	objs[0].loadObj("apple");
+	objs[0].set_type(2);
 
 	objs.push_back(Object(Vector3(5, -18, 0)));
 	objs[1].loadObj("apple");
@@ -48,12 +49,6 @@ void TestScreen::update(double delta)
 
 	Screen::Character_Room_Collision_Detection();
 	Screen::Character_Objects_Collision_Detection();
-
-	if (GS::character->checkInteract() && GS::character->checkCollision()) {  // 인터렉션과 콜리젼을 둘다 체크.
-		objs.erase(objs.begin()+1); // 현재는 0번째 물체가 콜리젼 실험대상이었으므로 0번을 제거.
-		character->resetCollision();
-		character->setLife(character->getLife() + 1);
-	}
 
 }
 
