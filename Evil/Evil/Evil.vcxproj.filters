@@ -62,13 +62,13 @@
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\Game Model</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Cinematic.cpp">
       <Filter>Source Files\Game Model</Filter>
     </ClCompile>
-    <ClCompile Include="SecondRoom.cpp">
+    <ClCompile Include="ImageLoader.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="StartScreen.cpp">
       <Filter>Source Files\Game Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,13 +118,13 @@
     <ClInclude Include="Box.h">
       <Filter>Header Files\Game Model</Filter>
     </ClInclude>
-    <ClInclude Include="ImageLoader.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Cinematic.h">
       <Filter>Header Files\Game Model</Filter>
     </ClInclude>
-    <ClInclude Include="SecondRoom.h">
+    <ClInclude Include="ImageLoader.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="StartScreen.h">
       <Filter>Header Files\Game Model</Filter>
     </ClInclude>
   </ItemGroup>

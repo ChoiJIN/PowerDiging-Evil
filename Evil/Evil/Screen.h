@@ -96,6 +96,11 @@ public:
 
 	}
 
+	unsigned char getInterfaceType()
+	{
+		return Interfacetype;
+	}
+
 	void Character_Objects_Collision_Detection() // 캐릭터와 오브젝트가 충돌했는 지 update 마다 체크한다.
 	{
 		for (size_t i = 0; i < objs.size(); i++) // 모든 오브젝트를 검사
@@ -215,6 +220,7 @@ protected:
 	Box roomBox;
 	Object hpBar;
 	Matrix4 modelview, perspective;
+	unsigned char Interfacetype = 0; // 0번 : S키를 누르면 시작, 1번 : 평소의 인터페이스
 
 private:
 	time_t currentTime;

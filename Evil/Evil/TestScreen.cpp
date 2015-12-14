@@ -4,6 +4,7 @@
 
 TestScreen::TestScreen()
 {
+	Interfacetype = 1;
 	// object initializtion
 	// 0번 오브젝트는 문
 	objs.push_back(Object(Vector3(GS::option.roomSize, -18, 0)));

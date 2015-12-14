@@ -15,6 +15,9 @@ struct GameOption {
 class GS {
 private:
 	static bool gameEnd;
+	static bool play;
+	static unsigned char KeyInterface;
+	static unsigned char PageUpDown; // 0일 때 현상유지, 1일 때 push, 2일 때 pop
 	static bool isCinematicPlaying;
 
 public:
@@ -38,6 +41,36 @@ public:
 	static bool inCinematic() 
 	{
 		return isCinematicPlaying;
+	}
+
+	static void setPlay(bool p)
+	{
+		play = p;
+	}
+
+	static unsigned char getKeyInterface()
+	{
+		return KeyInterface;
+	}
+
+	static void setKeyInterface(unsigned char I)
+	{
+		KeyInterface = I;
+	}
+
+	static unsigned char getPageUpDown()
+	{
+		return PageUpDown;
+	}
+
+	static void setPageUpDown(unsigned char n)
+	{
+		PageUpDown = n;
+	}
+
+	static bool getPlay()
+	{
+		return play;
 	}
 
 	static void setCinematic(bool val) 

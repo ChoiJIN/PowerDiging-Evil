@@ -1,4 +1,6 @@
 #include "GLApp.h"
+#include "ImageLoader.h"
+#include "TestScreen.h"
 
 GLApp* GLApp::instance = NULL;
 
@@ -96,7 +98,7 @@ void GLApp::mainLoop()
 
 		// 이전 프레임에서 현재 프레임까지 걸린 시간이
 		// 미리 설정한 delta time이상 흘렀을때만 연산
-		while (timeAccumulator >= deltaTime)
+		while ((timeAccumulator >= deltaTime) && GS::getPlay() == true)
 		{
 			screenStk.top()->update(deltaTime);
 			timeAccumulator -= deltaTime;
@@ -111,7 +113,9 @@ void GLApp::mainLoop()
 
 		glfwPollEvents();
 
+		if(GS::getPlay() == true)
 		timeAccumulator += glfwGetTime() - startTime;
+
 	}
 }
 
@@ -131,34 +135,50 @@ void GLApp::errorCallback(int error, const char * description)
 	_fgetchar();
 }
 
+
 void GLApp::keyCallback(GLFWwindow * window, int key, int scancode, int action, int mods)
 {
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 		//glfwSetWindowShouldClose(window, GL_TRUE);
 		GS::setGameEnd(true);
 	// move
-	switch (key) {
-	case GLFW_KEY_A:
-		if (action == GLFW_PRESS) GS::character->setLeftMove(true);
-		else if (action == GLFW_RELEASE) GS::character->setLeftMove(false);
-		break;
-	case GLFW_KEY_D:
-		if (action == GLFW_PRESS) GS::character->setRightMove(true);
-		else if (action == GLFW_RELEASE) GS::character->setRightMove(false);
-		break;
-	case GLFW_KEY_W:
-		if (action == GLFW_PRESS) GS::character->setFrontMove(true);
-		else if (action == GLFW_RELEASE) GS::character->setFrontMove(false);
-		break;
-	case GLFW_KEY_S:
-		if (action == GLFW_PRESS) GS::character->setBackMove(true);
-		else if (action == GLFW_RELEASE) GS::character->setBackMove(false);
-		break;
-	case GLFW_KEY_E:
-		if (action == GLFW_PRESS) GS::character->interact(true);
-		else if (action == GLFW_RELEASE) GS::character->interact(false);
-		break;
-	}
+	if(GS::getKeyInterface() == 0)
+		switch (key) {
+		case GLFW_KEY_S:
+		{
+			if(action == GLFW_PRESS) GS::setPageUpDown(1);
+			break;
+		}
+		}
+	else if(GS::getKeyInterface() == 1)
+		switch (key) {
+		case GLFW_KEY_A:
+			if (action == GLFW_PRESS) GS::character->setLeftMove(true);
+			else if (action == GLFW_RELEASE) GS::character->setLeftMove(false);
+			break;
+		case GLFW_KEY_D:
+			if (action == GLFW_PRESS) GS::character->setRightMove(true);
+			else if (action == GLFW_RELEASE) GS::character->setRightMove(false);
+			break;
+		case GLFW_KEY_W:
+			if (action == GLFW_PRESS) GS::character->setFrontMove(true);
+			else if (action == GLFW_RELEASE) GS::character->setFrontMove(false);
+			break;
+		case GLFW_KEY_S:
+			if (action == GLFW_PRESS) GS::character->setBackMove(true);
+			else if (action == GLFW_RELEASE) GS::character->setBackMove(false);
+			break;
+		case GLFW_KEY_E:
+			if (action == GLFW_PRESS) GS::character->interact(true);
+			else if (action == GLFW_RELEASE) GS::character->interact(false);
+			break;
+		case GLFW_KEY_P:
+			if (action == GLFW_PRESS) GS::setPlay(false);
+			break;
+		case GLFW_KEY_R:
+			if (action == GLFW_PRESS) GS::setPlay(true);
+			break;
+		}
 }
 
 void GLApp::buttonCallback(GLFWwindow * window, int button, int action, int mode)

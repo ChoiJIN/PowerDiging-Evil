@@ -15,6 +15,7 @@
 #include "ImageLoader.h"
 
 #include "TestScreen.h"
+#include "StartScreen.h"
 using namespace std;
 
 int main(void)
@@ -30,11 +31,14 @@ int main(void)
 	if (app.init() == APP_INIT_ERROR)
 		return -1;
 
-	TestScreen tes;
-	GLApp::getInstance()->pushScreen(&tes);
-	ImageLoader::loadTexture("brick.jpg");
-	ImageLoader::loadTexture("brick_door.jpg");
-	ImageLoader::loadTexture("brick_bottom.jpg");
+
+	StartScreen SS;
+	GLApp::getInstance()->pushScreen(&SS);
+
+//	ImageLoader::loadTexture("brick.jpg");
+//	ImageLoader::loadTexture("brick_door.jpg");
+//	ImageLoader::loadTexture("brick_bottom.jpg");
+	ImageLoader::loadTexture("Start_Title.jpg");
 
 	glMatrixMode(GL_MODELVIEW);
 
