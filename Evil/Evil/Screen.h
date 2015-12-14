@@ -65,7 +65,7 @@ public:
 
 		if (hpVal != character->getLife()) {
 			uiComponent[0] = Object(Vector3(0, 8, 0));
-			uiComponent[0].loadObj("hp" + to_string(character->getLife()));
+			uiComponent[0].loadObj("hp" + to_string(character->getLife() >= 10? 10 : character->getLife()));
 			hpVal = character->getLife();
 		}
 
