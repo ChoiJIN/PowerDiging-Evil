@@ -16,7 +16,7 @@ class GS {
 private:
 	static bool gameEnd;
 	static bool play;
-	static unsigned char KeyInterface;
+	static unsigned char KeyInterface; // 0일 때 'S' 키로 스타트, 1일 때 'WASD'로 이동하며 'PR'로 정지 및 재개
 	static unsigned char PageUpDown; // 0일 때 현상유지, 1일 때 push, 2일 때 pop
 	static bool isCinematicPlaying;
 

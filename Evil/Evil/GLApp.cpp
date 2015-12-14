@@ -16,7 +16,7 @@ GLApp::~GLApp()
 	glfwDestroyWindow(window);
 	//Finalize and clean up GLFW
 	glfwTerminate();
-
+	stack<Screen*>().swap(screenStk);
 	exit(EXIT_SUCCESS);
 }
 

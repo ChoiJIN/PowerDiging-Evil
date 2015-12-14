@@ -21,6 +21,14 @@ CObjLoader::CObjLoader()
 	_loaded = false;
 }
 
+CObjLoader::~CObjLoader()
+{
+	vector<sMaterial>().swap(materials);
+	vector<sTexCoord>().swap(texcoords);
+	vector<sVertex>().swap(normals);
+	vector<sPart>().swap(parts);
+}
+
 bool CObjLoader::Load(const char *objfile, const char *mtlfile)
 {
 	_splitpath(objfile, NULL, _work_path, NULL, NULL);

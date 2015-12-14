@@ -59,6 +59,7 @@ class CObjLoader
 {
 public:
 	CObjLoader ();
+	~CObjLoader();
 
 	void loadMaterialsTexture ();
 	bool Load (const char *objfile, const char *mtlfile = NULL);

@@ -28,6 +28,7 @@ TestScreen::TestScreen()
 
 TestScreen::~TestScreen()
 {
+	vector<Object>().swap(objs);
 }
 
 void TestScreen::update(double delta)
