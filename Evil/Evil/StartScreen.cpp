@@ -36,9 +36,12 @@ void StartScreen::render()
 	glLoadMatrixf(perspective.get());
 
 	glMatrixMode(GL_MODELVIEW);
+	modelview = GLUtil::LookAt(Vector3(0.f, 0.f, 1.f), Vector3(0.f, 0.f, 10.f), Vector3(0, 1, 0));
+
 	glLoadIdentity();
+	glMultMatrixf(modelview.get());
 
 
-	GLuint t = ImageLoader::getTextureId("Start_Title.jpg");
-	GLDraw::planeTexture(Vector3(-1.f, -1.f, 1.f), Vector3(1.f, -1.f, 1.f), Vector3(1.f, 1.f, 1.f), Vector3(-1.f, 1.f, 1.f), t);
-}
+	GLuint t = ImageLoader::getTextureId("Evil_Title.jpg");
+	GLDraw::planeTexture(Vector3(10.f, -10.f, 10.f), Vector3(-10.f, -10.f, 10.f), Vector3(-10.f, 10.f, 10.f), Vector3(10.f, 10.f, 10.f), t);
+} // 0123 -> 1032

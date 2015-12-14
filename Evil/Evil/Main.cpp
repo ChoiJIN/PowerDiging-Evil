@@ -38,7 +38,7 @@ int main(void)
 //	ImageLoader::loadTexture("brick.jpg");
 //	ImageLoader::loadTexture("brick_door.jpg");
 //	ImageLoader::loadTexture("brick_bottom.jpg");
-	ImageLoader::loadTexture("Start_Title.jpg");
+	ImageLoader::loadTexture("Evil_Title.jpg");
 
 	glMatrixMode(GL_MODELVIEW);
 
